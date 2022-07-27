@@ -10,5 +10,12 @@ public class Main {
         Epic e2 = new Epic("Накормить Коте", "Проверить есть ли СВЕЖАЯ вода", "NEW");
         SubTask s3 = new SubTask("Насыпать корм", "Успеть убежать от миски, затопчет", "IN_PROGRESS", 4);
 
+        taskManager.add(e1);
+        taskManager.add(s1);
+        taskManager.add(s2);
+        taskManager.add(e2);
+        taskManager.add(e1);
+        taskManager.add(s3);
+
     }
 }

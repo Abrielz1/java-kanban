@@ -2,7 +2,7 @@ import java.util.*;
 
 public class SubTask extends Task {
 
-    protected int epicId;
+    private int epicId;
 
     public SubTask(String name, String description, String status, int epicID) {
         super(name, description, status);
