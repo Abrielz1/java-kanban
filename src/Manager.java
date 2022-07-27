@@ -1,55 +1,151 @@
 import java.util.*;
+
 public class Manager {
+    protected int id = 0;
 
-   HashMap<Integer, ArrayList<Epic>> epicHash = new HashMap<>();
-   HashMap<Integer, ArrayList<SubTask>>subEpicHash = new HashMap<>();
+    protected HashMap<Integer, Epic> epicHash = new HashMap<Integer, Epic>();
+    protected HashMap<Integer, SubTask> subEpicHash = new HashMap<Integer, SubTask>();
+    protected HashMap<Integer, Task> taskArray = new HashMap<Integer, Task>();
 
-    ArrayList<Epic> pid= new ArrayList<>();
-    ArrayList<SubTask> dip= new ArrayList<>();
-    ArrayList<Task> taskArray = new ArrayList<>();
+    public HashMap<Integer, Epic> getEpicHash() {
+        return epicHash;
+    }
 
+    public HashMap<Integer, SubTask> getSubEpicHash() {
+        return subEpicHash;
+    }
 
-int id = 0;
-int subId = 0;
-int taskId = 0;
-int addEpic(Epic epic){
+    public HashMap<Integer, Task> getTaskArray() {
+        return taskArray;
+    }
 
-pid.add(epic);
-epicHash.put(id, pid);
-id++;
-return id;
-}
+    public Task getTaskById(int id) {
+        Task task = taskArray.get(id);
+        return task;
+    }
 
-void addSubEpic(SubTask subTask){
+    public Epic getEpicById(int id) {
+        Epic epic = epicHash.get(id);
+        return epic;
+    }
 
-dip.add(subTask);
-subEpicHash.put(subId, dip);
-subId++;
-}
+    public SubTask getSubtaskById() {
+        SubTask subTask = subEpicHash.get(id);
+        return subTask;
+    }
 
-void addTask(Task task){
+    public void add(Task task) {
+        if (taskArray.isEmpty()) {
+            System.out.println("Данные, простой задачи отсутствуют");
+        } else {
+            System.out.println("Данные, простой задачи присутствуют");
+        }
+        task.setId(id++);
+        taskArray.put(task.getId(), task);
+    }
 
-taskArray.add(task);
-taskId++;
-}
+    public void addEpicTask(Epic epic) {
+        if (epicHash.isEmpty()) {
+            System.out.println("Данные, комплексной задачи отсутствуют");
+        } else {
+            System.out.println("Данные, комплексной задачи присутствуют");
+        }
+        epic.setId(id++);
+        epicHash.put(epic.getId(), epic);
 
-void printEpic(){
-
-   for (Integer dip : epicHash.keySet()) {
-       for (Epic val : epicHash.get(dip)) {
-           System.out.print(val.idEpicTask + " ");
-           System.out.print(val.nameEpicTask + " ");
-           System.out.print(val.explanationEpicTask + " ");
-           System.out.print(val.statusEpicTask + " " + "\n");
-       }
-   }
-        for (Integer dip: subEpicHash.keySet()) {
-            for (SubTask val: subEpicHash.get(dip)) {
-                System.out.print(val.idSubTask + " ");
-                System.out.print(val.nameSubTask + " ");
-                System.out.print(val.explanationSubTask + " ");
-                System.out.print(val.statusSubTask + " " + "\n");
+        for (SubTask value : subEpicHash.values()) {
+            if (epic.getId() == value.getEpicId()) {
+                epic.subTaskId.add(value.getId());
             }
         }
     }
+
+    public void addSubEpicTask(SubTask subtask) {
+        if (subEpicHash.isEmpty()) {
+            System.out.println("Данные, комплексной подзадачи отсутствуют");
+        } else {
+            System.out.println("Данные, комплексной подзадачи присутствуют");
+        }
+        subtask.setId(id++);
+        subEpicHash.put(subtask.getId(), subtask);
+        for (Epic value : epicHash.values()) {
+            if (value.getId() == subtask.getId()) {
+                value.subTaskId.add(value.getId());
+            }
+        }
+
+    }
+
+    public void update(Task task) {
+        taskArray.put(task.getId(), task);
+    }
+
+    public void updateEpic(Epic epic) {
+        if (epicHash.isEmpty()) {
+            System.out.println("Данные, комплексной подзадачи отсутствуют");
+        } else {
+            System.out.println("Данные, комплексной подзадачи присутствуют");
+        }
+        epicHash.put(epic.getId(), epic);
+        ArrayList<Integer> subTaskId = epic.getSubtaskId();
+        for (int id : subTaskId) {
+            if (subEpicHash.get(id).getStatus().equals("DONE")) {
+                epic.setStatus("DONE");
+                break;
+            } else if (subEpicHash.get(id).getStatus().equals("IN_PROGRESS")) {
+                epic.setStatus("IN_PROGRESS");
+                return;
+            }
+        }
+    }
+
+    public void updateSubEpic(SubTask subtask) {
+        if (subEpicHash.isEmpty()) {
+            System.out.println("Данные, комплексной задачи отсутствуют");
+        } else {
+            System.out.println("Данные, комплексной задачи присутствуют");
+        }
+
+        subEpicHash.put(subtask.getId(), subtask);
+    }
+
+    public void removeTask(int id) {
+        taskArray.remove(id);
+    }
+
+    public void removeEpic(int id) {
+        if (epicHash.isEmpty()) {
+            System.out.println("Данные, комплексной задачи отсутствуют");
+        } else {
+            System.out.println("Данные, комплексной задачи присутствуют");
+        }
+        ArrayList<Integer> containerSubTasksIDs = epicHash.get(id).getSubtaskId();
+        for (Integer Ids : containerSubTasksIDs) {
+            epicHash.remove(Ids);
+        }
+        epicHash.remove(id);
+    }
+
+    public void removeSubTask(int id) {
+        if (subEpicHash.isEmpty()) {
+            System.out.println("Данные, комплексной подзадачи отсутствуют");
+        } else {
+            System.out.println("Данные, комплексной подзадачи присутствуют");
+        }
+        int Ids = subEpicHash.get(id).getEpicId();
+        epicHash.get(Ids).subTaskId.remove(id);
+        subEpicHash.remove(id);
+    }
+
+    public void purgeTask() {
+        taskArray.clear();
+    }
+
+    public void purgeAllTask() {
+        epicHash.clear();
+        subEpicHash.clear();
+    }
+
 }
+
+

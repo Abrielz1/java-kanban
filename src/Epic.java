@@ -1,16 +1,23 @@
 import java.util.*;
-public class Epic{
 
-    int idEpicTask;
-    String nameEpicTask;
-    String explanationEpicTask;
-    String statusEpicTask;
+public class Epic extends Task {
+    protected ArrayList<Integer> subTaskId;
 
-    Epic(int idEpicTask, String nameEpicTask, String explanationEpicTask, String statusEpicTask){
-        this.idEpicTask = idEpicTask;
-        this.nameEpicTask = nameEpicTask;
-        this.explanationEpicTask = explanationEpicTask;
-        this.statusEpicTask = statusEpicTask;
 
-  }
+    Epic(String name, String description, String status) {
+        super(name, description, status);
+        subTaskId = new ArrayList<>();
+
+    }
+
+
+    public ArrayList<Integer> getSubtaskId() {
+        return subTaskId;
+    }
+
+    public void setSubtaskId(ArrayList<Integer> subtaskId) {
+        this.subTaskId = subtaskId;
+    }
+
+
 }

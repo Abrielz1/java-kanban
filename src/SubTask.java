@@ -1,19 +1,19 @@
 import java.util.*;
-public class SubTask{
 
-    int idSubTask;
-    String nameSubTask;
-    String explanationSubTask;
-    String statusSubTask;
+public class SubTask extends Task {
 
-  SubTask(int idTask, int idSubTask, String nameSubTask, String explanationSubTask, String statusSubTask){
+    protected int epicId;
 
-
-      this.idSubTask = idSubTask;
-        this.nameSubTask = nameSubTask;
-        this.explanationSubTask = explanationSubTask;
-        this.statusSubTask = statusSubTask;
-
+    public SubTask(String name, String description, String status, int epicID) {
+        super(name, description, status);
+        this.epicId = epicId;
     }
 
+    public int getEpicId() {
+        return epicId;
+    }
+
+    public void setEpicId(int epicId) {
+        this.epicId = epicId;
+    }
 }

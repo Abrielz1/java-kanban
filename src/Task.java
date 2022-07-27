@@ -2,15 +2,47 @@ import java.util.*;
 
 public class Task {
 
-    int idTask;
-    String nameTask;
-    String explanationTask;
-    String statusTask;
-    Task(int idTask, String nameTask, String explanationTask, String statusTask){
-        this.idTask = idTask;
-        this.nameTask = nameTask;
-        this.explanationTask = explanationTask;
-        this.statusTask = statusTask;
-  }
+    protected int id;
+    protected String name;
+    protected String description;
+    protected String status;
 
+    Task(String name, String description, String status) {
+
+        this.name = name;
+        this.description = description;
+        this.status = status;
+    }
+
+    int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return name;
+    }
+
+    public void setTitle(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
