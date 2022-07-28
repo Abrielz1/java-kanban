@@ -167,6 +167,16 @@ public class Manager {
         epicHash.clear();
         subEpicHash.clear();
     }
+
+    @Override
+    public String toString() {
+        return "Manager{" +
+                "id=" + id +
+                ", epicHash=" + epicHash +
+                ", subEpicHash=" + subEpicHash +
+                ", taskArray=" + taskArray +
+                '}';
+    }
 }
 
 
