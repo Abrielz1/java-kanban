@@ -147,12 +147,12 @@ public class Manager {
         epicHash.remove(id);
     }
 
-    public void removeSubTask(int id) {
+    public void removeSubTask(int id, SubTask subtask) {
 
         int Ids = subEpicHash.get(id).getEpicId();
         epicHash.get(Ids).subTaskId.remove(id);
         subEpicHash.remove(id);
-        updateEpic(epicHash.get());;
+        updateEpic(epicHash.get(subtask.getEpicId()));;
     }
 
     public void purgeTask() {
