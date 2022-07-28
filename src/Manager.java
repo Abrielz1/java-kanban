@@ -116,6 +116,9 @@ public class Manager {
 
     public void updateSubEpic(SubTask subtask) {
         subEpicHash.put(subtask.getId(), subtask);
+        if (taskArray.containsKey(subtask.getId())){
+            updateEpic(epicHash.get(subtask.getEpicId()));
+        }
     }
 
     public ArrayList<SubTask> getAllSubtasksFromEpic(int id) {
