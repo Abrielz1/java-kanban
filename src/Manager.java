@@ -11,6 +11,28 @@ public class Manager {
         return epicHash;
     }
 
+    public HashMap<Integer, SubTask> getSubEpicHash() {
+        return subEpicHash;
+    }
+
+    public HashMap<Integer, Task> getTaskArray() {
+        return taskArray;
+    }
+
+    public Task getTaskById(int id) {
+        return taskArray.get(id);
+    }
+
+    public Epic getEpicById(int id) {
+        Epic epic = epicHash.get(id);
+        return epic;
+    }
+
+    public SubTask getSubtaskById() {
+        SubTask subTask = subEpicHash.get(id);
+        return subTask;
+    }
+
     public ArrayList<Epic> getEpicHashValues() {
         ArrayList<Epic>valuesEpic = new ArrayList<>();
         for (Integer integer : epicHash.keySet()) {
@@ -22,7 +44,7 @@ public class Manager {
     }
 
     public ArrayList<Task> getValuesSubTask() {
-    ArrayList<Task>valuSubTask = new ArrayList<>();
+        ArrayList<Task>valuSubTask = new ArrayList<>();
         for (Integer integer : subEpicHash.keySet()) {
             for (SubTask value : subEpicHash.values()) {
                 getValuesSubTask().add(value);
@@ -41,72 +63,33 @@ public class Manager {
         return taskValues;
     }
 
-    public HashMap<Integer, SubTask> getSubEpicHash() {
-        return subEpicHash;
-    }
-
-    public HashMap<Integer, Task> getTaskArray() {
-        return taskArray;
-    }
-
-    public Task getTaskById(int id) {
-        Task task = taskArray.get(id);
-        return task;
-    }
-
-    public Epic getEpicById(int id) {
-        Epic epic = epicHash.get(id);
-        return epic;
-    }
-
-    public SubTask getSubtaskById() {
-        SubTask subTask = subEpicHash.get(id);
-        return subTask;
-    }
-
     public void add(Task task) {
-        if (taskArray.isEmpty()) {
-            System.out.println("Данные, простой задачи отсутствуют");
-        } else {
-            System.out.println("Данные, простой задачи присутствуют");
-        }
         task.setId(id++);
         taskArray.put(task.getId(), task);
     }
 
     public void addEpicTask(Epic epic) {
-        if (epicHash.isEmpty()) {
-            System.out.println("Данные, комплексной задачи отсутствуют");
-        } else {
-            System.out.println("Данные, комплексной задачи присутствуют");
-        }
         epic.setId(id++);
         epicHash.put(epic.getId(), epic);
 
         for (SubTask value : subEpicHash.values()) {
             if (epic.getId() == value.getEpicId()) {
                 epic.subTaskId.add(value.getId());
-                //epic.getSubtaskId(value.getId());
-
             }
         }
     }
 
     public void addSubEpicTask(SubTask subtask) {
-        if (subEpicHash.isEmpty()) {
-            System.out.println("Данные, комплексной подзадачи отсутствуют");
-        } else {
-            System.out.println("Данные, комплексной подзадачи присутствуют");
-        }
         subtask.setId(id++);
         subEpicHash.put(subtask.getId(), subtask);
         for (Epic value : epicHash.values()) {
             if (value.getId() == subtask.getId()) {
-                //   value.subTaskId.add(value.getId());
                 value.getSubtaskId().add(value.getId());
             }
         }
-
+        if (taskArray.containsKey(subtask.getId())){
+            updateEpic(epicHash.get(subtask.getEpicId()));
+        }
     }
 
     public void update(Task task) {
@@ -114,11 +97,7 @@ public class Manager {
     }
 
     public void updateEpic(Epic epic) {
-        if (epicHash.isEmpty()) {
-            return;
-        } else {
-
-        }
+        epic.setStatus("NEW");
         epicHash.put(epic.getId(), epic);
         ArrayList<Integer> subTaskId = epic.getSubtaskId();
         for (int id : subTaskId) {
@@ -128,16 +107,14 @@ public class Manager {
             } else if (subEpicHash.get(id).getStatus().equals("IN_PROGRESS")) {
                 epic.setStatus("IN_PROGRESS");
                 return;
+            } else if (epic.getStatus().equals("DONE") && taskArray.get(id).getStatus().equals("NEW")) {
+                epic.setStatus("IN_PROGRESS");
+                return;
             }
         }
     }
 
     public void updateSubEpic(SubTask subtask) {
-        if (epicHash.containsKey(epicHash.get(id))) {
-
-        } else {
-            return;
-        }
         subEpicHash.put(subtask.getId(), subtask);
     }
 
