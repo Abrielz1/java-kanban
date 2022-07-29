@@ -55,6 +55,8 @@ public class Manager {
     }
 
     public void addSubEpicTask(SubTask subtask) {
+        subtask.setId(id++);
+        subEpicHash.put(subtask.getId(), subtask);
         updateEpic(epicHash.get(subtask.getEpicId()));
     }
 
