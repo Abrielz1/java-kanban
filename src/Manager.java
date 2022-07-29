@@ -46,6 +46,7 @@ public class Manager {
     public void add(Task task) {
         task.setId(id++);
         taskArray.put(task.getId(), task);
+        johnTheRipper(getEpicById(task.getId()));
     }
 
     public void addEpicTask(Epic epic) {
@@ -85,7 +86,6 @@ public class Manager {
     public void updateSubEpic(SubTask subtask) {
         subEpicHash.put(subtask.getId(), subtask);
         updateEpic(epicHash.get(subtask.getEpicId()));
-
     }
 
     public ArrayList<SubTask> getAllSubtasksFromEpic(int id) {
@@ -110,12 +110,10 @@ public class Manager {
     }
 
     public void removeSubTask(int id, SubTask subtask) {
-
         int Ids = subEpicHash.get(id).getEpicId();
         epicHash.get(Ids).subTaskId.remove(id);
+        johnTheRipper(getEpicById(subtask.getEpicId()));
         subEpicHash.remove(id);
-        updateEpic(epicHash.get(subtask.getEpicId()));
-        ;
     }
 
     public void purgeTask() {
