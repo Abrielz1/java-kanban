@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.*; //от греха решил перепроверить и не зря :(
 
 public class Manager {
     protected int id = 0;
@@ -49,7 +49,7 @@ public class Manager {
         johnTheRipper(getEpicById(task.getId()));
     }
 
-    public void addEpicTask(Epic epic) {
+    public void addEpicTask(Epic epic) { //тут разве не надо перепотрошить статусы? johnTheRipper(getEpicById(subtask.getEpicId()));
         epic.setId(id++);
         epicHash.put(epic.getId(), epic);
     }
