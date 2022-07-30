@@ -46,10 +46,10 @@ public class Manager {
     public void add(Task task) {
         task.setId(id++);
         taskArray.put(task.getId(), task);
-        johnTheRipper(getEpicById(task.getId()));
+
     }
 
-    public void addEpicTask(Epic epic) { //тут разве не надо перепотрошить статусы? johnTheRipper(getEpicById(subtask.getEpicId()));
+    public void addEpicTask(Epic epic) {
         epic.setId(id++);
         epicHash.put(epic.getId(), epic);
     }
@@ -57,7 +57,7 @@ public class Manager {
     public void addSubEpicTask(SubTask subtask) {
         subtask.setId(id++);
         subEpicHash.put(subtask.getId(), subtask);
-        updateEpic(epicHash.get(subtask.getEpicId()));
+        johnTheRipper(getEpicById(subtask.getEpicId()));
     }
 
     public void update(Task task) {
@@ -87,7 +87,7 @@ public class Manager {
 
     public void updateSubEpic(SubTask subtask) {
         subEpicHash.put(subtask.getId(), subtask);
-        updateEpic(epicHash.get(subtask.getEpicId()));
+        johnTheRipper(getEpicById(subtask.getEpicId()));
     }
 
     public ArrayList<SubTask> getAllSubtasksFromEpic(int id) {
