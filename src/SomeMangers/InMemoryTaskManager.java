@@ -8,12 +8,9 @@ import Constructors.TaskStatus;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class InMemoryTaskManager implements  TaskManager { //сюда копируем содержимое бывшего Constructors.Task manager
+public class InMemoryTaskManager implements TaskManager { //сюда копируем содержимое бывшего Constructors.Task manager
 
-//todo Просмотром будем считаться вызов у менеджера методов получения задачи по идентификатору — getTask(), getSubtask() и getEpic().
-// От повторных просмотров избавляться не нужно.
-
-private int id = 0;
+    private int id = 0;
 
     private HashMap<Integer, Epic> epicHash = new HashMap<Integer, Epic>();
     private HashMap<Integer, SubTask> subEpicHash = new HashMap<Integer, SubTask>();

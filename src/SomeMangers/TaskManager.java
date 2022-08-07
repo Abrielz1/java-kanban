@@ -15,7 +15,7 @@ public interface TaskManager {
     HashMap<Integer, SubTask> subEpicHash = new HashMap<Integer, SubTask>();
     HashMap<Integer, Task> taskArray = new HashMap<Integer, Task>();
 
-   HashMap<Integer, Epic> getEpicHash();
+    HashMap<Integer, Epic> getEpicHash();
 
     HashMap<Integer, SubTask> getSubEpicHash();
 
@@ -43,7 +43,7 @@ public interface TaskManager {
 
     void updateEpic(Epic epic);
 
-   void johnTheRipper(Epic epic);
+    void johnTheRipper(Epic epic);
 
     void updateSubEpic(SubTask subtask);
 

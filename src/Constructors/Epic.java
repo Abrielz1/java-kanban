@@ -8,7 +8,6 @@ import java.util.ArrayList;
             super(name, description, status);
         }
 
-
         public ArrayList<Integer> getSubtaskId() {
             return subTaskId;
         }

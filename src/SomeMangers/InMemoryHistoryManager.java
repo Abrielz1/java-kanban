@@ -15,12 +15,12 @@ public class InMemoryHistoryManager implements HistoryManager {
         if (history.size() == 10) {
             history.remove(0);
             count++;
-        history.add(0,task);
+            history.add(0, task);
         } else {
             history.add(task);
             count++;
         }
-        if (count == 10){
+        if (count == 10) {
             for (Task counter : history) {
                 System.out.println(counter.getDescription());
             }
