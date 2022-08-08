@@ -25,8 +25,5 @@ public class Main {
 
         inMemoryTaskManager.add(e1);
         inMemoryTaskManager.add(e2);
-
-
-
     }
 }
