@@ -15,7 +15,7 @@ public class Main {
         SubTask s1 = new SubTask("Заставить себя", "Трудно", TaskStatus.NEW, 1);
         SubTask s2 = new SubTask("Пойти в магазин", "Очиння дорого", TaskStatus.NEW, 1);
         Epic e2 = new Epic("Накормить Коте", "Проверить есть ли СВЕЖАЯ вода", TaskStatus.NEW);
-        SubTask s3 = new SubTask("Насыпать корм", "Успеть убежать от миски, затопчет", TaskStatus.NEW, 4);
+        SubTask s3 = new SubTask("Насыпать корм", "Успеть убежать от миски, затопчет", TaskStatus.NEW, 2);
         Task t1 = new Task("","", TaskStatus.NEW);
         inMemoryTaskManager.add(e1);
         inMemoryTaskManager.add(s1);
