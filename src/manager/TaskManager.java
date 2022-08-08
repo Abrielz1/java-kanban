@@ -10,8 +10,6 @@ import java.util.Map;
 
 public interface TaskManager {
 
-    int id = 0;
-
     HashMap<Integer, Epic> epicHash = new HashMap<Integer, Epic>();
     HashMap<Integer, SubTask> subEpicHash = new HashMap<Integer, SubTask>();
     HashMap<Integer, Task> taskArray = new HashMap<Integer, Task>();
