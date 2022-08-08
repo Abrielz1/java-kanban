@@ -158,7 +158,6 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public TaskManager getTask(int id) {
         Managers.getDefaultHistory().add(taskArray.get(id));
-      //  historyManager.add(task);
         return (TaskManager) taskArray.get(id);
     }
 

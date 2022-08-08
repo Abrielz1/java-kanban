@@ -3,7 +3,6 @@ package manager;
 public class Managers {
     private final HistoryManager historyManager = Managers.getDefaultHistory();
 
-
     public static HistoryManager getDefaultHistory() {
         return new InMemoryHistoryManager();
     }
