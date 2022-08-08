@@ -95,8 +95,8 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void updateAllStatuses(Epic epic) {
         epic.setStatus(TaskStatus.NEW);
-        List<Integer>subTaskId = epic.getSubtaskId();
-        for (int id : subTaskId) {
+        List<Integer> subTaskId = epic.getSubtaskId();
+        for (Integer id : subTaskId) {
             if (subEpicHash.get(id).getStatus().equals(TaskStatus.DONE)) {
                 epic.setStatus(TaskStatus.DONE);
                 break;
