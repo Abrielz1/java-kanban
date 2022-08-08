@@ -10,7 +10,7 @@ public interface HistoryManager {
 
     HistoryManager getHistory();
 
-    void add(Task task);
+    void addHistory(Task task);
 
     void printAll();
 
