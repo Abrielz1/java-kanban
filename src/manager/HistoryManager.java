@@ -6,12 +6,8 @@ import java.util.List;
 
 public interface HistoryManager {
 
-    List<Task> history();
-
-    HistoryManager getHistory();
+    List<Task> getHistory();
 
     void addHistory(Task task);
-
-    void printAll();
 
 }

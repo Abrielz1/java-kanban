@@ -6,6 +6,7 @@ import constructor.Task;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface TaskManager {
 
@@ -15,17 +16,17 @@ public interface TaskManager {
     HashMap<Integer, SubTask> subEpicHash = new HashMap<Integer, SubTask>();
     HashMap<Integer, Task> taskArray = new HashMap<Integer, Task>();
 
-    HashMap<Integer, Epic> getEpicHash();
+    Map<Integer, Epic> getEpicHash();
 
-    HashMap<Integer, SubTask> getSubEpicHash();
+    Map<Integer, SubTask> getSubEpicHash();
 
-    HashMap<Integer, Task> getTaskArray();
+    Map<Integer, Task> getTaskArray();
 
-    TaskManager getTaskById(int id);
+    Task getTaskById(int id);
 
-    TaskManager getEpicById(int id);
+    Epic getEpicById(int id);
 
-    TaskManager getSubtaskById();
+    SubTask getSubtaskById();
 
     List<Epic> getEpicHashValues();
 
@@ -61,10 +62,6 @@ public interface TaskManager {
 
     void purgeAllTask();
 
-    TaskManager getTask(int id);
-
-    TaskManager getSubTask(int id);
-
-    TaskManager getEpic(int id);
+    HistoryManager getHistoryManager();
 
 }
