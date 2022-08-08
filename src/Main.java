@@ -2,12 +2,14 @@ import constructor.Epic;
 import constructor.SubTask;
 import constructor.Task;
 import constructor.TaskStatus;
+import manager.InMemoryHistoryManager;
 import manager.InMemoryTaskManager;
 import manager.TaskManager;
 
 public class Main {
     public static void main(String[] args) {
         InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
+        InMemoryHistoryManager inMemoryHistoryManager = new InMemoryHistoryManager();
 
         Epic e1 = new Epic ("Накормить коте", "Важнейшее", TaskStatus.NEW);
         SubTask s1 = new SubTask("Заставить себя", "Трудно", TaskStatus.NEW, 1);
@@ -26,7 +28,7 @@ public class Main {
         inMemoryTaskManager.add(e1);
         inMemoryTaskManager.add(e2);
 
-
+        System.out.println();
 
     }
 }
