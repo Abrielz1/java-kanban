@@ -1,8 +1,8 @@
-package SomeMangers;
+package manager;
 
-import Constructors.Epic;
-import Constructors.SubTask;
-import Constructors.Task;
+import constructor.Epic;
+import constructor.SubTask;
+import constructor.Task;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,6 +1,6 @@
-package SomeMangers;
+package manager;
 
-import Constructors.Task;
+import constructor.Task;
 
 import java.util.List;
 
