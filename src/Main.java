@@ -28,7 +28,12 @@ public class Main {
         inMemoryTaskManager.add(e1);
         inMemoryTaskManager.add(e2);
 
-        System.out.println();
+        inMemoryTaskManager.getTask(1);
+        inMemoryTaskManager.getSubTask(1);
+        inMemoryTaskManager.getEpic(1);
+
+        inMemoryHistoryManager.addHistory(e1);
+
 
     }
 }
