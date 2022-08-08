@@ -8,10 +8,10 @@ public interface HistoryManager {
 
     List<Task> history();
 
-    Task getHistory();
+    HistoryManager getHistory();
 
     void add(Task task);
 
-    void  printAll();
+    void printAll();
 
 }

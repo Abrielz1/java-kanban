@@ -17,17 +17,12 @@ public class InMemoryHistoryManager implements HistoryManager {
             history.add(0, task);
         } else {
             history.add(task);
-
-        }
-        if (history.size() == 10) {
-            for (Task counter : history) {
-                System.out.println(counter.getDescription());
-            }
         }
     }
 
+
     @Override
-    public void printAll(){
+    public void printAll() {
         for (Task counter : history) {
             System.out.println(counter.getDescription());
         }
@@ -39,8 +34,8 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     @Override
-    public Task getHistory() {
-        return (Task) history;
+    public HistoryManager getHistory() {
+        return (HistoryManager) history;
     }
 
 }

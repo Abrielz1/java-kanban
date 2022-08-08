@@ -21,11 +21,11 @@ public interface TaskManager {
 
     HashMap<Integer, Task> getTaskArray();
 
-    Task getTaskById(int id);
+    TaskManager getTaskById(int id);
 
-    Epic getEpicById(int id);
+    TaskManager getEpicById(int id);
 
-    SubTask getSubtaskById();
+    TaskManager getSubtaskById();
 
     List<Epic> getEpicHashValues();
 
@@ -47,7 +47,7 @@ public interface TaskManager {
 
     void updateSubEpic(SubTask subtask);
 
-  List<SubTask> getAllSubtasksFromEpic(int id);
+    List<SubTask> getAllSubtasksFromEpic(int id);
 
     void removeTask(int id);
 
@@ -61,14 +61,11 @@ public interface TaskManager {
 
     void purgeAllTask();
 
-    Task getTask(int id);
+    TaskManager getTask(int id);
 
-    SubTask getSubTask(int id);
+    TaskManager getSubTask(int id);
 
-    Epic getEpic(int id);
+    TaskManager getEpic(int id);
 
-    String toString();
-
-
-
+  //  TaskManager toString();
 }

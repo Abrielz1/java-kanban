@@ -29,16 +29,16 @@ public class InMemoryTaskManager implements TaskManager {
         return taskArray;
     }
 
-    public Task getTaskById(int id) {
-        return taskArray.get(id);
+    public TaskManager getTaskById(int id) {
+        return (TaskManager) taskArray.get(id);
     }
 
-    public Epic getEpicById(int id) {
-        return epicHash.get(id);
+    public TaskManager getEpicById(int id) {
+        return (TaskManager) epicHash.get(id);
     }
 
-    public SubTask getSubtaskById() {
-        return subEpicHash.get(id);
+    public TaskManager getSubtaskById() {
+        return (TaskManager) subEpicHash.get(id);
     }
 
 
@@ -70,20 +70,20 @@ public class InMemoryTaskManager implements TaskManager {
     public void addSubEpicTask(SubTask subtask) {
         subtask.setId(id++);
         subEpicHash.put(subtask.getId(), subtask);
-        updateAllStatuses(getEpicById(subtask.getEpicId()));
+        updateAllStatuses((Epic) getEpicById(subtask.getEpicId()));
     }
 
     @Override
     public void updateSubEpic(SubTask subtask) {
         subEpicHash.put(subtask.getId(), subtask);
-        updateAllStatuses(getEpicById(subtask.getEpicId()));
+        updateAllStatuses((Epic) getEpicById(subtask.getEpicId()));
     }
 
     @Override
     public void removeSubTask(int id, SubTask subtask) {
         int Ids = subEpicHash.get(id).getEpicId();
         epicHash.get(Ids).getSubtaskId().remove(id);
-        updateAllStatuses(getEpicById(subtask.getEpicId()));
+        updateAllStatuses((Epic) getEpicById(subtask.getEpicId()));
         subEpicHash.remove(id);
     }
 
@@ -156,30 +156,28 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public Task getTask(int id) {
+    public TaskManager getTask(int id) {
         Managers.getDefaultHistory().add(taskArray.get(id));
-        return taskArray.get(id);
+      //  historyManager.add(task);
+        return (TaskManager) taskArray.get(id);
     }
 
     @Override
-    public Epic getEpic(int id) {
+    public TaskManager getEpic(int id) {
         Managers.getDefaultTask().add(epicHash.get(id));
-        return epicHash.get(id);
+        return (TaskManager) epicHash.get(id);
     }
 
     @Override
-    public SubTask getSubTask(int id) {
+    public TaskManager getSubTask(int id) {
         Managers.getDefaultTask().add(subEpicHash.get(id));
-        return subEpicHash.get(id);
+        return (TaskManager) subEpicHash.get(id);
     }
 
     @Override
     public String toString() {
-        return "Manager{" +
-                "id=" + id +
-                ", epicHash=" + epicHash +
-                ", subEpicHash=" + subEpicHash +
-                ", taskArray=" + taskArray +
-                '}';
+        return super.toString();
     }
+
+
 }
