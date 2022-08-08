@@ -1,13 +1,13 @@
 package manager;
 
 public class Managers {
-    private  final HistoryManager historyManager;
+    private final HistoryManager historyManager;
 
-    Managers(){
+    Managers() {
         historyManager = Managers.getDefaultHistory();
     }
 
-    public void add(){
+    public void add() {
         getDefaultHistory();
     }
 
