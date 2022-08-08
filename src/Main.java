@@ -26,7 +26,7 @@ public class Main {
         inMemoryTaskManager.add(e1);
         inMemoryTaskManager.add(e2);
 
-        inMemoryTaskManager.getAllSubtasksFromEpic(0);
+
 
     }
 }
