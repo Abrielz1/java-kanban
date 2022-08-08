@@ -1,30 +1,1 @@
-package constructor;
-
-public class SubTask extends Task {
-
-    private int epicId;
-
-    public SubTask(int id, String name, String description, TaskStatus status, int epicID) {
-        super(id, name, description, status);
-        this.epicId = epicID;
-    }
-
-    public int getEpicId() {
-        return epicId;
-    }
-
-    public void setEpicId(int epicId) {
-        this.epicId = epicId;
-    }
-
-    @Override
-    public String toString() {
-        return "Constructors.SubTask{" +
-                "epicId=" + getId() +
-                ", id=" + getId() +
-                ", name='" + getTitle() + '\'' +
-                ", description='" + getDescription() + '\'' +
-                ", status='" + getStatus() + '\'' +
-                '}';
-    }
-}
+package constructor;public class SubTask extends Task {    private int epicId;    public SubTask(int id, String name, String description, TaskStatus status, int epicID) {        super(id, name, description, status);        this.epicId = epicID;    }    public int getEpicId() {        return epicId;    }    public void setEpicId(int epicId) {        this.epicId = epicId;    }    @Override    public String toString() {        return "Constructors.SubTask{" +                "epicId=" + getId() +                ", id=" + getId() +                ", name='" + getTitle() + '\'' +                ", description='" + getDescription() + '\'' +                ", status='" + getStatus() + '\'' +                '}';    }}
