@@ -1,18 +1,19 @@
 package Constructors;
 
-import java.util.ArrayList;
+import java.awt.*;
+import java.util.List;
     public class Epic extends Task {
-        private ArrayList<Integer> subTaskId;
+        private List<Integer> subTaskId;
 
         Epic(String name, String description, TaskStatus status) {
             super(name, description, status);
         }
 
-        public ArrayList<Integer> getSubtaskId() {
+        public List<Integer> getSubtaskId() {
             return subTaskId;
         }
 
-        public void setSubtaskId(ArrayList<Integer> subtaskId) {
+        public void setSubtaskId(List<Integer> subtaskId) {
             this.subTaskId = subtaskId;
         }
 

@@ -2,15 +2,15 @@ package SomeMangers;
 
 public class Managers {
 
-    private static InMemoryHistoryManager InMemoryHistoryManager = new InMemoryHistoryManager();
-    private static InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
+    private static InMemoryHistoryManager InMemoryHistoryManager;
+    private static InMemoryTaskManager InMemoryTaskManager;
 
     public static HistoryManager getDefaultHistory() {
-        return InMemoryHistoryManager;
+        return new  InMemoryHistoryManager();
     }
 
     public static TaskManager getDefaultTask() {
-        return inMemoryTaskManager;
+        return new  InMemoryTaskManager();
     }
 }
 

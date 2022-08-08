@@ -5,13 +5,13 @@ public class Task {
     private int id;
     private String name;
     private String description;
-    private TaskStatus status;
+    private TaskStatus taskStatus;
 
     Task(String name, String description, TaskStatus status) {
 
         this.name = name;
         this.description = description;
-        this.status = status;
+        this.taskStatus = status;
     }
 
     public int getId() {
@@ -39,11 +39,11 @@ public class Task {
     }
 
     public TaskStatus getStatus() {
-        return status;
+        return taskStatus;
     }
 
     public void setStatus(TaskStatus taskStatus) {
-        this.status = status;
+        this.taskStatus = taskStatus;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class Task {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", status='" + status + '\'' +
+                ", status='" + taskStatus + '\'' +
                 '}';
     }
 }

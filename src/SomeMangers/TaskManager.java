@@ -4,8 +4,8 @@ import Constructors.Epic;
 import Constructors.SubTask;
 import Constructors.Task;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public interface TaskManager {
 
@@ -27,11 +27,11 @@ public interface TaskManager {
 
     SubTask getSubtaskById();
 
-    ArrayList<Epic> getEpicHashValues();
+    List<Epic> getEpicHashValues();
 
-    ArrayList<Task> getValuesSubTask();
+    List<Task> getValuesSubTask();
 
-    ArrayList<Task> getTaskValues();
+    List<Task> getTaskValues();
 
     void add(Task task);
 
@@ -43,11 +43,11 @@ public interface TaskManager {
 
     void updateEpic(Epic epic);
 
-    void johnTheRipper(Epic epic);
+    void updateAllStatuses(Epic epic);
 
     void updateSubEpic(SubTask subtask);
 
-    ArrayList<SubTask> getAllSubtasksFromEpic(int id);
+  List<SubTask> getAllSubtasksFromEpic(int id);
 
     void removeTask(int id);
 
@@ -68,5 +68,7 @@ public interface TaskManager {
     Epic getEpic(int id);
 
     String toString();
+
+
 
 }

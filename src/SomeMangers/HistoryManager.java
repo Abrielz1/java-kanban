@@ -2,12 +2,16 @@ package SomeMangers;
 
 import Constructors.Task;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface HistoryManager {
 
-    ArrayList<Task> history();   //List<Constructors.Task> getHistory();
+    List<Task> history();
+
+    Task getHistory();
 
     void add(Task task);
+
+    void  printAll();
 
 }
