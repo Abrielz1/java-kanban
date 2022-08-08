@@ -1,7 +1,15 @@
 package manager;
 
 public class Managers {
-    private final HistoryManager historyManager = Managers.getDefaultHistory();
+    private  final HistoryManager historyManager;
+
+    Managers(){
+        historyManager = Managers.getDefaultHistory();
+    }
+
+    public void add(){
+        getDefaultHistory();
+    }
 
     public static HistoryManager getDefaultHistory() {
         return new InMemoryHistoryManager();

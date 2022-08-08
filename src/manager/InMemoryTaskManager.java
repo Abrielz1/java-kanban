@@ -11,6 +11,8 @@ import java.util.List;
 
 public class InMemoryTaskManager implements TaskManager {
 
+    HistoryManager  historyManager = Managers.getDefaultHistory();
+
     private int id = 0;
 
     private HashMap<Integer, Epic> epicHash = new HashMap<Integer, Epic>();
@@ -40,7 +42,6 @@ public class InMemoryTaskManager implements TaskManager {
     public TaskManager getSubtaskById() {
         return (TaskManager) subEpicHash.get(id);
     }
-
 
     public List<Epic> getEpicHashValues() {
         return new ArrayList<>(epicHash.values());
@@ -157,19 +158,19 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public TaskManager getTask(int id) {
-        Managers.getDefaultHistory().add(taskArray.get(id));
+        historyManager.add(taskArray.get(id));
         return (TaskManager) taskArray.get(id);
     }
 
     @Override
     public TaskManager getEpic(int id) {
-        Managers.getDefaultTask().add(epicHash.get(id));
+        historyManager.add(epicHash.get(id));
         return (TaskManager) epicHash.get(id);
     }
 
     @Override
     public TaskManager getSubTask(int id) {
-        Managers.getDefaultTask().add(subEpicHash.get(id));
+        historyManager.add(subEpicHash.get(id));
         return (TaskManager) subEpicHash.get(id);
     }
 
@@ -177,6 +178,4 @@ public class InMemoryTaskManager implements TaskManager {
     public String toString() {
         return super.toString();
     }
-
-
 }
