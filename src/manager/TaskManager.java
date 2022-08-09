@@ -9,11 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface TaskManager {
-
-    HashMap<Integer, Epic> epicHash = new HashMap<>();
-    HashMap<Integer, SubTask> subEpicHash = new HashMap<>();
-    HashMap<Integer, Task> taskArray = new HashMap<>();
-
     Map<Integer, Epic> getEpicHash();
 
     Map<Integer, SubTask> getSubEpicHash();
@@ -61,5 +56,4 @@ public interface TaskManager {
     void purgeAllTask();
 
     HistoryManager getHistoryManager();
-
 }
