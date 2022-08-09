@@ -14,7 +14,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     HistoryManager historyManager = Managers.getDefaultHistory();
 
-   private int id = 0;
+    private int id = 0;
 
     private Map<Integer, Epic> epicHash = new HashMap<Integer, Epic>();
     private Map<Integer, SubTask> subEpicHash = new HashMap<Integer, SubTask>();
@@ -39,7 +39,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     public Epic getEpicById(int id) {
         historyManager.addHistory(epicHash.get(id));
-        return  epicHash.get(id);
+        return epicHash.get(id);
     }
 
     public SubTask getSubtaskById() {
