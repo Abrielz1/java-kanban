@@ -8,7 +8,6 @@ public class Main {
     public static void main(String[] args) {
         TaskManager inMemoryTaskManager = new InMemoryTaskManager();
         HistoryManager inMemoryHistoryManager = new InMemoryHistoryManager();
-        TaskManager task = Managers.getDefaultTask();
 
         Epic e1 = new Epic(1, "Накормить коте", "Важнейшее", TaskStatus.NEW);
         SubTask s1 = new SubTask(2, "Заставить себя", "Трудно", TaskStatus.NEW, 1);
@@ -28,8 +27,6 @@ public class Main {
         inMemoryTaskManager.add(s1);
         inMemoryTaskManager.getHistoryManager();
         inMemoryHistoryManager.getHistory();
-
-        task.add(s1);
 
         inMemoryTaskManager.getTaskById(t1.getId());
         inMemoryTaskManager.purgeAllTask();
