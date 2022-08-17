@@ -1,5 +1,7 @@
 package constructor;
 
+import constructor.status.TaskStatus;
+
 public class Task {
 
     private int id;

@@ -1,5 +1,7 @@
 package constructor;
 
+import constructor.status.TaskStatus;
+
 public class SubTask extends Task {
 
     private int epicId;

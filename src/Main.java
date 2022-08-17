@@ -1,35 +1,31 @@
 import constructor.Epic;
 import constructor.SubTask;
 import constructor.Task;
-import constructor.TaskStatus;
+import constructor.status.TaskStatus;
 import manager.*;
+import manager.history.HistoryManager;
+import manager.history.InMemoryHistoryManager;
+import manager.task.InMemoryTaskManager;
+import manager.task.TaskManager;
 
 public class Main {
     public static void main(String[] args) {
-        TaskManager inMemoryTaskManager = new InMemoryTaskManager();
+        TaskManager taskManager = new InMemoryTaskManager();
+        TaskManager inMemoryTaskManager = Managers.getDefaultTask();
         HistoryManager inMemoryHistoryManager = new InMemoryHistoryManager();
+        TaskManager task = new InMemoryTaskManager();
 
-        Epic e1 = new Epic(1, "Накормить коте", "Важнейшее", TaskStatus.NEW);
-        SubTask s1 = new SubTask(2, "Заставить себя", "Трудно", TaskStatus.NEW, 1);
-        SubTask s2 = new SubTask(3, "Пойти в магазин", "Купить корм", TaskStatus.NEW, 1);
-        Epic e2 = new Epic(4, "Накормить Коте", "Проверить есть ли СВЕЖАЯ вода", TaskStatus.NEW);
-        SubTask s3 = new SubTask(5, "Насыпать корм", "Успеть убежать от миски, затопчет", TaskStatus.NEW, 2);
-        Task t1 = new Task(0, "Погладить кота", "", TaskStatus.NEW);
+        task.add(new Epic(InMemoryTaskManager.getIdCounter(), "Накормить коте", "Важнейшее", TaskStatus.NEW));
+        task.add(new Epic(InMemoryTaskManager.getIdCounter(), "Накормить коте", "Важнейшее", TaskStatus.NEW));
 
-        inMemoryTaskManager.add(t1);
-        inMemoryTaskManager.getHistoryManager();
-        inMemoryHistoryManager.getHistory();
+        task.add(new SubTask(InMemoryTaskManager.getIdCounter(), "Заставить себя", "Трудно", TaskStatus.NEW, 1));
+        task.add(new SubTask(InMemoryTaskManager.getIdCounter(), "Пойти в магазин", "Купить корм", TaskStatus.NEW, 1));
 
-        inMemoryTaskManager.add(e1);
-        inMemoryTaskManager.getHistoryManager();
-        inMemoryHistoryManager.getHistory();
+        task.add(new Epic(InMemoryTaskManager.getIdCounter(), "Накормить Коте", "Проверить есть ли СВЕЖАЯ вода", TaskStatus.NEW));
+        task.add(new SubTask(InMemoryTaskManager.getIdCounter(), "Насыпать корм", "Успеть убежать от миски, затопчет", TaskStatus.NEW, 2));
 
-        inMemoryTaskManager.add(s1);
-        inMemoryTaskManager.getHistoryManager();
-        inMemoryHistoryManager.getHistory();
+        task.add(new Task(InMemoryTaskManager.getIdCounter(), "Погладить кота", "", TaskStatus.NEW));
 
-        inMemoryTaskManager.getTaskById(t1.getId());
-        inMemoryTaskManager.purgeAllTask();
-
+        task.update(new SubTask(InMemoryTaskManager.getIdCounter(), "Заставить себя", "Трудно", TaskStatus.IN_PROGRESS, 1));
     }
 }

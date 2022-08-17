@@ -1,10 +1,10 @@
-package manager;
+package manager.task;
 
 import constructor.Epic;
 import constructor.SubTask;
 import constructor.Task;
+import manager.history.HistoryManager;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,11 +35,11 @@ public interface TaskManager {
 
     void update(Task task);
 
-    void updateEpic(Epic epic);
+    void update(Epic epic);
 
     void updateAllStatuses(Epic epic);
 
-    void updateSubEpic(SubTask subtask);
+    void update(SubTask subtask);
 
     List<SubTask> getAllSubtasksFromEpic(int id);
 
@@ -54,6 +54,8 @@ public interface TaskManager {
     void purgeEpic();
 
     void purgeAllTask();
+
+    List<Task> getHistory();
 
     HistoryManager getHistoryManager();
 }

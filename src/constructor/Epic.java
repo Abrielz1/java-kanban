@@ -1,5 +1,7 @@
 package constructor;
 
+import constructor.status.TaskStatus;
+
 import java.util.ArrayList;
 import java.util.List;
 
