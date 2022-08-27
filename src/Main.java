@@ -10,8 +10,7 @@ import manager.task.TaskManager;
 public class Main {
     public static void main(String[] args) {
 
-        TaskManager task = Managers.getDefaultTask();
-        InMemoryTaskManager taskManager = (InMemoryTaskManager) task;
+        TaskManager taskManager = Managers.getDefaultTask();
 //================================================================================
         taskManager.add(new Epic(InMemoryTaskManager.getIdCounter(), "Накормить коте", "Важнейшее", TaskStatus.NEW));
         taskManager.add(new SubTask(InMemoryTaskManager.getIdCounter(), "Заставить себя", "Трудно", TaskStatus.NEW, 1));
