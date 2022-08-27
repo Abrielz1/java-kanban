@@ -22,9 +22,9 @@ public class Main {
 //================================================================================
         taskManager.add(new Task(InMemoryTaskManager.getIdCounter(), "Погладить кота", "", TaskStatus.NEW));
 //================================================================================
-        taskManager.update(new SubTask(InMemoryTaskManager.getIdCounter(), "Заставить себя", "Трудно", TaskStatus.IN_PROGRESS, 1));
+        taskManager.update(new SubTask(2, "Заставить себя", "Трудно", TaskStatus.IN_PROGRESS, 1));
 
- //       taskManager.getTaskById(1);
+ 
 
     }
 }
