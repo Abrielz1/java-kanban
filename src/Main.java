@@ -24,5 +24,7 @@ public class Main {
 //================================================================================
         taskManager.update(new SubTask(InMemoryTaskManager.getIdCounter(), "Заставить себя", "Трудно", TaskStatus.IN_PROGRESS, 1));
 
+ //       taskManager.getTaskById(1);
+
     }
 }
