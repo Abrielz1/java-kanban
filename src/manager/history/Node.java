@@ -2,13 +2,13 @@ package manager.history;
 
 class Node<T> {
     T value;
-    Node<T> tail;
+    Node<T> prev;
     Node<T> next;
 
-    Node(T value, Node<T> tail, Node<T> head) {
+    Node(T value, Node<T> prev, Node<T> next) {
         this.value = value;
-        this.tail = tail;
-        this.next = head;
+        this.prev = prev;
+        this.next = next;
     }
 
 }

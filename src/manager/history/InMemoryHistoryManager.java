@@ -66,12 +66,12 @@ class CustomLinkedList {
         if (node.equals(head)) {
             head = node.next;
             if (node.next != null) {
-                node.next.tail = null;
+                node.next.prev = null;
             }
         } else {
-            node.tail.next = node.next;
+            node.prev.next = node.next;
             if (node.next != null) {
-                node.next.tail = node.tail;
+                node.next.prev = node.prev;
 
             }
         }
