@@ -11,7 +11,6 @@ public class Main {
     public static void main(String[] args) {
 
         TaskManager taskManager = Managers.getDefaultTask();
-
 //================================================================================
         taskManager.add(new Epic(InMemoryTaskManager.getIdCounter(), "Накормить коте", "Важнейшее", TaskStatus.NEW));
         taskManager.add(new SubTask(InMemoryTaskManager.getIdCounter(), "Заставить себя", "Трудно", TaskStatus.NEW, 1));
@@ -22,9 +21,7 @@ public class Main {
 //================================================================================
         taskManager.add(new Task(InMemoryTaskManager.getIdCounter(), "Погладить кота", "", TaskStatus.NEW));
 //================================================================================
-      taskManager.update(new SubTask(2, "Заставить себя", "Трудно", TaskStatus.IN_PROGRESS, 1));
-
- //       taskManager.getTaskById(1);
+        taskManager.update(new SubTask(2, "Заставить себя", "Трудно", TaskStatus.IN_PROGRESS, 1));
 
     }
 }
