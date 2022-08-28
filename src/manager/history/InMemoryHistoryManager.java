@@ -30,12 +30,6 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     @Override
-    public void clear() {
-        history.clear();
-        historyList.clear();
-    }
-
-    @Override
     public List<Task> getHistory() {
         return historyList.getTasks();
     }
@@ -78,12 +72,8 @@ class CustomLinkedList {
             node.prev.next = node.next;
             if (node.next != null) {
                 node.next.prev = node.prev;
+
             }
         }
-    }
-
-    public void clear() {
-        head = null;
-        tail = null;
     }
 }
