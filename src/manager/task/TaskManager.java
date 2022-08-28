@@ -9,53 +9,26 @@ import java.util.List;
 import java.util.Map;
 
 public interface TaskManager {
-    Map<Integer, Epic> getEpicHash();
-
-    Map<Integer, SubTask> getSubEpicHash();
-
-    Map<Integer, Task> getTaskArray();
 
     Task getTaskById(int id);
-
     Epic getEpicById(int id);
-
-    SubTask getSubtaskById();
-
-    List<Epic> getEpicHashValues();
-
-    List<Task> getValuesSubTask();
-
-    List<Task> getTaskValues();
+    SubTask getSubtaskById(int id);
 
     void add(Task task);
-
     void add(Epic epic);
-
     void add(SubTask subtask);
-
     void update(Task task);
-
     void update(Epic epic);
-
-    void updateAllStatuses(Epic epic);
-
     void update(SubTask subtask);
 
-    List<SubTask> getAllSubtasksFromEpic(int id);
+    void removeAllTasks();
+    void removeAllEpicsAndSubtasks();
+    void removeTaskById(int id);
+    void removeEpicById(int id);
+    void removeSubtaskById(Integer id);
 
-    void removeTask(int id);
-
-    void removeEpic(int id);
-
-    void removeSubTask(int id, SubTask subtask);
-
-    void purgeTask();
-
-    void purgeEpic();
-
-    void purgeAllTask();
+    List<SubTask> getAllSubtasksByEpic(int id);
 
     List<Task> getHistory();
 
-    HistoryManager getHistoryManager();
 }
