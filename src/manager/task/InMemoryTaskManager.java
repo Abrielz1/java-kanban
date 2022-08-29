@@ -51,14 +51,14 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void add(Task task) {
+    public int add(Task task) {
         task.setId(idCounter++);
         taskArray.put(task.getId(), task);
-
+        return task.getId();
     }
 
     @Override
-    public void add(Epic epic) {
+    public int add(Epic epic) {
         epic.setId(idCounter++);
         epicHash.put(epic.getId(), epic);
         for (SubTask subtask : subEpicHash.values()) {
@@ -66,10 +66,11 @@ public class InMemoryTaskManager implements TaskManager {
                 epic.getSubtaskId().add(subtask.getId());
             }
         }
+        return epic.getId();
     }
 
     @Override
-    public void add(SubTask subtask) {
+    public int add(SubTask subtask) {
         subtask.setId(idCounter++);
         subEpicHash.put(subtask.getId(), subtask);
         for (Epic epic : epicHash.values()) {
@@ -80,6 +81,7 @@ public class InMemoryTaskManager implements TaskManager {
         if (epicHash.containsKey(subtask.getEpicId())) {
             update(epicHash.get(subtask.getEpicId()));
         }
+        return  subtask.getId();
     }
     @Override
     public void update(Task task) {
