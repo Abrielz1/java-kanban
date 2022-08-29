@@ -5,8 +5,8 @@ import constructor.status.TaskStatus;
 public class Task {
 
     private int id;
-    private String name;
-    private String description;
+    private final String name;
+    private final String description;
     private TaskStatus taskStatus;
 
     public Task(String name, String description, TaskStatus status) {
@@ -28,16 +28,8 @@ public class Task {
         return name;
     }
 
-    public void setTitle(String name) {
-        this.name = name;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public TaskStatus getStatus() {

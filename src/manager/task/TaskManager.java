@@ -3,10 +3,8 @@ package manager.task;
 import constructor.Epic;
 import constructor.SubTask;
 import constructor.Task;
-import manager.history.HistoryManager;
-
 import java.util.List;
-import java.util.Map;
+
 
 public interface TaskManager {
 

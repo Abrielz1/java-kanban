@@ -19,22 +19,6 @@ public class InMemoryTaskManager implements TaskManager {
     protected Map<Integer, Epic> epicHash = new HashMap<>();
     protected Map<Integer, SubTask> subEpicHash = new HashMap<>();
 
-    public Map<Integer, Task> getTasks() {
-        return taskArray;
-    }
-
-    public Map<Integer, Epic> getEpics() {
-        return epicHash;
-    }
-
-    public Map<Integer, SubTask> getSubtasks() {
-        return subEpicHash;
-    }
-
-    public static int getIdCounter() {
-        return idCounter;
-    }
-
     public Task getTaskById(int id) {
         historyManager.addHistory(taskArray.get(id));
         return taskArray.get(id);
