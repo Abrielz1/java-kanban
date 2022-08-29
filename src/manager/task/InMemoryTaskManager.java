@@ -62,7 +62,7 @@ public class InMemoryTaskManager implements TaskManager {
         epic.setId(idCounter++);
         epicHash.put(epic.getId(), epic);
         for (SubTask subtask : subEpicHash.values()) {
-            if(epic.getId() == subtask.getEpicId()) {
+            if (epic.getId() == subtask.getEpicId()) {
                 epic.getSubtaskId().add(subtask.getId());
             }
         }
@@ -74,15 +74,16 @@ public class InMemoryTaskManager implements TaskManager {
         subtask.setId(idCounter++);
         subEpicHash.put(subtask.getId(), subtask);
         for (Epic epic : epicHash.values()) {
-            if(epic.getId() == subtask.getEpicId()) {
+            if (epic.getId() == subtask.getEpicId()) {
                 epic.getSubtaskId().add(subtask.getId());
             }
         }
         if (epicHash.containsKey(subtask.getEpicId())) {
             update(epicHash.get(subtask.getEpicId()));
         }
-        return  subtask.getId();
+        return subtask.getId();
     }
+
     @Override
     public void update(Task task) {
         taskArray.put(task.getId(), task);
@@ -109,6 +110,7 @@ public class InMemoryTaskManager implements TaskManager {
             }
         }
     }
+
     @Override
     public void update(SubTask subtask) {
         subEpicHash.put(subtask.getId(), subtask);

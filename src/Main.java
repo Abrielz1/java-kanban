@@ -38,11 +38,5 @@ public class Main {
         taskManager.getTaskById(9);
         taskManager.removeEpicById(7);
         taskManager.removeEpicById(1);
-
-
-
-
-
-
     }
 }
