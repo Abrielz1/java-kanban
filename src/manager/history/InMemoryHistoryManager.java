@@ -5,8 +5,9 @@ import constructor.Task;
 import java.util.*;
 
 public class InMemoryHistoryManager implements HistoryManager {
-    private final Map<Integer, Node<Task>> history;
-    private final CustomLinkedList<Task> historyList;
+    public final Map<Integer, Node<Task>> history;
+
+    public final CustomLinkedList<Task> historyList;
 
     public InMemoryHistoryManager() {
         this.history = new HashMap<>();
@@ -35,7 +36,7 @@ public class InMemoryHistoryManager implements HistoryManager {
 }
 
 class CustomLinkedList<T> {
-    private Node<T> head;
+    Node<T> head;
     Node<T> tail;
 
     public void linkLast(T t) {
@@ -73,7 +74,6 @@ class CustomLinkedList<T> {
             node.prev.next = node.next;
             if (node.next != null) {
                 node.next.prev = node.prev;
-
             }
         }
     }
