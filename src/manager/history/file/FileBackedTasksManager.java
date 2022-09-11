@@ -116,19 +116,13 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
 
 
     private void save() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("resources\\file.csv", StandardCharsets.UTF_8))) {
-            Writer fileWriter = new FileWriter("resources\\file.csv", StandardCharsets.UTF_8);
-            List<Task> taskDump = new ArrayList<>();
-            taskDump.addAll(taskArray.values());
-            taskDump.addAll(epicHash.values());
-            taskDump.addAll(subEpicHash.values());
-
-            for (Task task : taskDump) {
-                task.toString();
-                System.out.println();
-            }
-            fileWriter.write(historyToString(historyManager));
-            fileWriter.close();
+        try {
+            Path path = Path.of("resources\\file.csv");
+            String head = "id,type,name,status,description,epic" + System.lineSeparator();
+            String data = head +
+                    taskToString(this) + System.lineSeparator() +
+                    historyToString(historyManager);
+            Files.writeString(path, data);
         } catch (IOException e) {
                 throw new ManagerSaveException("Ошибка, при восстановлении из файла произошел сбой!");
         }
@@ -190,6 +184,18 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
             builder.setLength(builder.length() - 1);
         }
         return builder.toString();
+    }
+
+    private String taskToString(TaskManager  taskmanager) {
+       List<Task> taskDump = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        taskDump.addAll(taskArray.values());
+        taskDump.addAll(epicHash.values());
+        taskDump.addAll(subEpicHash.values());
+        for (Task task1 : taskDump) {
+            sb.append(task1.toString()).append(",").append(System.lineSeparator());
+        }
+        return sb.toString();
     }
 
     private String readFileContentsOrNull(String path) {
