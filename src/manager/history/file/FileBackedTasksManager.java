@@ -17,6 +17,28 @@ import java.util.List;
 
 public class FileBackedTasksManager extends InMemoryTaskManager implements TaskManager {
     public static void main(String[] args) {
+        TaskManager manager = new FileBackedTasksManager();
+        //================================================================================
+        manager.add(new Task("Погладить кота", "поймать его", TaskStatus.NEW));
+        manager.add(new Task("Убраться в доме", "заставить себя", TaskStatus.IN_PROGRESS));
+        //================================================================================
+        manager.add(new Epic("Накормить коте", "Важнейшее", TaskStatus.NEW));
+        manager.add(new SubTask("Заставить себя", "Трудно", TaskStatus.NEW, 1));
+        manager.add(new SubTask("Пойти в магазин", "Купить корм", TaskStatus.NEW, 1));
+        manager.add(new SubTask("Купить корм", "Выбрать корм", TaskStatus.IN_PROGRESS, 1));
+        //================================================================================
+        manager.add(new Epic("Накормить Коте", "Проверить есть ли СВЕЖАЯ вода", TaskStatus.NEW));
+        manager.add(new SubTask("Насыпать корм", "Успеть убежать от миски, затопчет", TaskStatus.NEW, 2));
+        //================================================================================
+
+        manager.getTaskById(1);
+        manager.getTaskById(1);
+        manager.getTaskById(2);
+        manager.getEpicById(3);
+        manager.getEpicById(3);
+        manager.getSubtaskById(4);
+        manager.getSubtaskById(5);
+        System.out.println(manager);
 
     }
 
@@ -94,8 +116,8 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
 
 
     private void save() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("resources/file.csv", StandardCharsets.UTF_8))) {
-            Writer fileWriter = new FileWriter("resources/file.csv", StandardCharsets.UTF_8);
+        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Abriel\\java-kanban - копия  1\\file.csv", StandardCharsets.UTF_8))) {
+            Writer fileWriter = new FileWriter("C:\\Users\\Abriel\\java-kanban - копия  1\\file.csv", StandardCharsets.UTF_8);
             List<Task> taskDump = new ArrayList<>();
             taskDump.addAll(taskArray.values());
             taskDump.addAll(epicHash.values());
@@ -112,7 +134,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
     }
 
     private void loadFromFile() {
-        String content = readFileContentsOrNull();
+        String content = readFileContentsOrNull("C:\\Users\\Abriel\\java-kanban - копия  1\\file.csv");
         if (content != null) {
             String[] lines = content.split("\r?\n");
             for (int j = 1; j < lines.length; j++) {
@@ -169,9 +191,9 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
         return builder.toString();
     }
 
-    private String readFileContentsOrNull() {
+    private String readFileContentsOrNull(String path) {
         try {
-            return Files.readString(Path.of("resources/file.csv"));
+            return Files.readString(Path.of(path));
         } catch (IOException e) {
             System.out.println("Невозможно прочитать файл!");
             return null;
