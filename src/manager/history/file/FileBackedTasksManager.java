@@ -116,8 +116,8 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
 
 
     private void save() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Abriel\\java-kanban - копия  1\\file.csv", StandardCharsets.UTF_8))) {
-            Writer fileWriter = new FileWriter("C:\\Users\\Abriel\\java-kanban - копия  1\\file.csv", StandardCharsets.UTF_8);
+        try (BufferedReader reader = new BufferedReader(new FileReader("resources\\file.csv", StandardCharsets.UTF_8))) {
+            Writer fileWriter = new FileWriter("resources\\file.csv", StandardCharsets.UTF_8);
             List<Task> taskDump = new ArrayList<>();
             taskDump.addAll(taskArray.values());
             taskDump.addAll(epicHash.values());
@@ -128,13 +128,14 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
                 System.out.println();
             }
             fileWriter.write(historyToString(historyManager));
+            fileWriter.close();
         } catch (IOException e) {
                 throw new ManagerSaveException("Ошибка, при восстановлении из файла произошел сбой!");
         }
     }
 
     private void loadFromFile() {
-        String content = readFileContentsOrNull("C:\\Users\\Abriel\\java-kanban - копия  1\\file.csv");
+        String content = readFileContentsOrNull("resources\\file.csv");
         if (content != null) {
             String[] lines = content.split("\r?\n");
             for (int j = 1; j < lines.length; j++) {
