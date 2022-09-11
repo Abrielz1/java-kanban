@@ -9,7 +9,6 @@ import java.util.List;
 public class Epic extends Task {
     private final List<Integer> subTaskId;
 
-    private Types types;
 
     public Epic(String name, String description, TaskStatus status) {
         super(name, description, status);
@@ -26,7 +25,7 @@ public class Epic extends Task {
         return "Constructors.Epic{" +
                 "subTaskId=" + getSubtaskId() +
                 ", id=" + getId()  +
-                ", type='" + types +
+                ", type='" + Types.Epic +
                 ", name='" + getTitle() + '\'' +
                 ", description='" + getDescription() + '\'' +
                 ", status='" + getStatus() + '\'' +

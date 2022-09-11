@@ -1,0 +1,9 @@
+id,type,name,status,description,epic
+Constructors.Task{id=1, type='Task, name='Погладить кота', description='поймать его', status='NEW'},
+Constructors.Task{id=2, type='Task, name='Убраться в доме', description='заставить себя', status='IN_PROGRESS'},
+Constructors.Epic{subTaskId=[], id=3, type='Epic, name='Накормить коте', description='Важнейшее', status='NEW'},
+Constructors.Epic{subTaskId=[], id=7, type='Epic, name='Накормить Коте', description='Проверить есть ли СВЕЖАЯ вода', status='NEW'},
+Constructors.SubTask{epicId=4, id=4, type='SubTask, name='Заставить себя', description='Трудно', status='NEW'},
+Constructors.SubTask{epicId=5, id=5, type='SubTask, name='Пойти в магазин', description='Купить корм', status='NEW'},
+Constructors.SubTask{epicId=6, id=6, type='SubTask, name='Купить корм', description='Выбрать корм', status='IN_PROGRESS'},
+

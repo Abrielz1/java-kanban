@@ -7,7 +7,6 @@ public class SubTask extends Task {
 
     private final int epicId;
 
-    private Types types;
 
     public SubTask(String name, String description, TaskStatus status, int epicID) {
         super(name, description, status);
@@ -24,7 +23,7 @@ public class SubTask extends Task {
         return "Constructors.SubTask{" +
                 "epicId=" + getId() +
                 ", id=" + getId()  +
-                ", type='" + types +
+                ", type='" + Types.SubTask +
                 ", name='" + getTitle() + '\'' +
                 ", description='" + getDescription() + '\'' +
                 ", status='" + getStatus() + '\'' +

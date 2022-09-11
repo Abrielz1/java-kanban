@@ -9,7 +9,6 @@ public class Task {
     private final String name;
     private final String description;
     private TaskStatus taskStatus;
-    private Types types;
 
     public Task(String name, String description, TaskStatus status) {
 
@@ -46,7 +45,7 @@ public class Task {
     public String toString() {
         return "Constructors.Task{" +
                 "id=" + id +
-                ", type='" + types +
+                ", type='" + Types.Task +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", status='" + taskStatus + '\'' +
