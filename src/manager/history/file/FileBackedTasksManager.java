@@ -43,7 +43,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
     }
 
     private FileBackedTasksManager() {
-        loadFromFile();
+
     }
 
     @Override

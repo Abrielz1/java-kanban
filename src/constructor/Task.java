@@ -5,10 +5,10 @@ import manager.history.file.Types;
 
 public class Task {
 
-    private int id;
-    private final String name;
-    private final String description;
-    private TaskStatus taskStatus;
+    int id;
+    final String name;
+    final String description;
+    TaskStatus taskStatus;
 
     public Task(String name, String description, TaskStatus status) {
 
@@ -43,12 +43,10 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Constructors.Task{" +
-                "id=" + id +
-                ", type='" + Types.Task +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", status='" + taskStatus + '\'' +
-                '}';
+        return id + "," +
+                Types.TASK + "," +
+                name + "," +
+                description + "," +
+                description;
     }
 }

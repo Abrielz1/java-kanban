@@ -20,13 +20,11 @@ public class SubTask extends Task {
 
     @Override
     public String toString() {
-        return "Constructors.SubTask{" +
-                "epicId=" + getId() +
-                ", id=" + getId()  +
-                ", type='" + Types.SubTask +
-                ", name='" + getTitle() + '\'' +
-                ", description='" + getDescription() + '\'' +
-                ", status='" + getStatus() + '\'' +
-                '}';
+        return id + "," +
+                Types.SUBTASK + "," +
+                name + "," +
+                taskStatus + "," +
+                description + "," +
+                epicId;
     }
 }

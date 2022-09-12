@@ -22,14 +22,11 @@ public class Epic extends Task {
 
     @Override
     public String toString() {
-        return "Constructors.Epic{" +
-                "subTaskId=" + getSubtaskId() +
-                ", id=" + getId()  +
-                ", type='" + Types.Epic +
-                ", name='" + getTitle() + '\'' +
-                ", description='" + getDescription() + '\'' +
-                ", status='" + getStatus() + '\'' +
-                '}';
+        return id + "," +
+                Types.EPIC + "," +
+                name + "," +
+                taskStatus + "," +
+                description;
     }
 }
 
