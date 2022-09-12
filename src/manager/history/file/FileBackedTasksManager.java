@@ -15,7 +15,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileBackedTasksManager extends InMemoryTaskManager implements TaskManager {
+public class FileBackedTasksManager extends InMemoryTaskManager {
     public static void main(String[] args) {
         TaskManager manager = new FileBackedTasksManager();
         //================================================================================
@@ -48,21 +48,24 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
 
     @Override
     public int add(Task task) {
+        int id = super.add(task);
         save();
-        return super.add(task);
+        return id;
 
     }
 
     @Override
     public int add(Epic epic) {
+        int id = super.add(epic);
         save();
-        return super.add(epic);
+        return id;
     }
 
     @Override
     public int add(SubTask subtask) {
+        int id = super.add(subtask);
         save();
-        return super.add(subtask);
+        return id;
     }
 
     @Override
@@ -118,13 +121,14 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
     private void save() {
         try {
             Path path = Path.of("resources\\file.csv");
-            String head = "id,type,name,status,description,epic" + System.lineSeparator();
+            final String head = "id,type,name,status,description,epic" + System.lineSeparator();
+
             String data = head +
                     taskToString(this) + System.lineSeparator() +
                     historyToString(historyManager);
             Files.writeString(path, data);
         } catch (IOException e) {
-                throw new ManagerSaveException("Ошибка, при восстановлении из файла произошел сбой!");
+                throw new ManagerSaveException("Ошибка, при записи файла произошел сбой!");
         }
     }
 
@@ -176,6 +180,9 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
 
     private static String historyToString(HistoryManager manager) {
         List<Task> list = manager.getHistory();
+        if (list.isEmpty()) {
+            return "";
+        }
         StringBuilder builder = new StringBuilder();
         for (Task task : list) {
             builder.append(task.getId()).append(",");
@@ -207,7 +214,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
         }
     }
 
-    static class ManagerSaveException extends Error {
+    static class ManagerSaveException extends RuntimeException {
         public ManagerSaveException(final String message) {
             super(message);
         }

@@ -6,4 +6,5 @@ id,type,name,status,description,epic
 4,SUBTASK,Заставить себя,NEW,Трудно,1,
 5,SUBTASK,Пойти в магазин,NEW,Купить корм,1,
 6,SUBTASK,Купить корм,IN_PROGRESS,Выбрать корм,1,
+8,SUBTASK,Насыпать корм,NEW,Успеть убежать от миски, затопчет,2,
 
