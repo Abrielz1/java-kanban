@@ -13,11 +13,36 @@ import java.util.List;
 import java.util.Map;
 
 public class InMemoryTaskManager implements TaskManager {
+
     private static int idCounter = 1;
     public HistoryManager historyManager = Managers.getDefaultHistory();
-    protected Map<Integer, Task> taskArray = new HashMap<>();
-    protected Map<Integer, Epic> epicHash = new HashMap<>();
-    protected Map<Integer, SubTask> subEpicHash = new HashMap<>();
+    public Map<Integer, Task> taskArray = new HashMap<>();
+    public Map<Integer, Epic> epicHash = new HashMap<>();
+    public Map<Integer, SubTask> subEpicHash = new HashMap<>();
+
+
+    public static int getIdCounter() {
+        return idCounter;
+    }
+
+    public static void setIdCounter(int idCounter) {
+        InMemoryTaskManager.idCounter = idCounter;
+    }
+
+    @Override
+    public Map<Integer, Task> getTasks() {
+        return taskArray;
+    }
+
+    @Override
+    public Map<Integer, Epic> getEpics() {
+        return epicHash;
+    }
+
+    @Override
+    public Map<Integer, SubTask> getSubtasks() {
+        return subEpicHash;
+    }
 
     public Task getTaskById(int id) {
         historyManager.addHistory(taskArray.get(id));

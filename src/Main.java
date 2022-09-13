@@ -4,13 +4,14 @@ import constructor.Task;
 import constructor.status.TaskStatus;
 import manager.Managers;
 import manager.history.InMemoryHistoryManager;
+import manager.history.file.FileBackedTasksManager;
 import manager.task.InMemoryTaskManager;
 import manager.task.TaskManager;
 
 public class Main {
     public static void main(String[] args) {
 
-        TaskManager taskManager = Managers.getDefaultTask();
+        FileBackedTasksManager taskManager = Managers.getDefaultFileManager();
 ////================================================================================
 //        taskManager.add(new Epic("Накормить коте", "Важнейшее", TaskStatus.NEW));
 //        taskManager.add(new SubTask("Заставить себя", "Трудно", TaskStatus.NEW, 1));
@@ -39,5 +40,6 @@ public class Main {
 //        taskManager.removeEpicById(7);
 //        taskManager.removeEpicById(1);
 //        taskManager.removeEpicById(5);
+        taskManager.loadFromFile();
     }
 }

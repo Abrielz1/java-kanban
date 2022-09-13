@@ -10,8 +10,18 @@ public class Task {
     final String description;
     TaskStatus taskStatus;
 
+    Types taskType;
+
     public Task(String name, TaskStatus status, String description) {
 
+        this.name = name;
+        this.description = description;
+        this.taskStatus = status;
+    }
+
+    public Task(int id, Types taskType, String name, TaskStatus status, String description) {
+        this.id = id;
+        this.taskType = taskType;
         this.name = name;
         this.description = description;
         this.taskStatus = status;
