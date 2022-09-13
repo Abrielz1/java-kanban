@@ -18,19 +18,19 @@ import java.util.List;
 public class FileBackedTasksManager extends InMemoryTaskManager {
     public static void main(String[] args) {
         TaskManager manager = new FileBackedTasksManager();
-        //================================================================================
-        manager.add(new Task("Погладить кота", "поймать его", TaskStatus.NEW));
-        manager.add(new Task("Убраться в доме", "заставить себя", TaskStatus.IN_PROGRESS));
-        //================================================================================
-        manager.add(new Epic("Накормить коте", "Важнейшее", TaskStatus.NEW));
-        manager.add(new SubTask("Заставить себя", "Трудно", TaskStatus.NEW, 1));
-        manager.add(new SubTask("Пойти в магазин", "Купить корм", TaskStatus.NEW, 1));
-        manager.add(new SubTask("Купить корм", "Выбрать корм", TaskStatus.IN_PROGRESS, 1));
-        //================================================================================
-        manager.add(new Epic("Накормить Коте", "Проверить есть ли СВЕЖАЯ вода", TaskStatus.NEW));
-        manager.add(new SubTask("Насыпать корм", "Успеть убежать от миски, затопчет", TaskStatus.NEW, 2));
-        //================================================================================
-
+        FileBackedTasksManager managers = new FileBackedTasksManager();
+//================================================================================
+        manager.add(new Task("Погладить кота",TaskStatus.NEW,  "поймать его"));
+        manager.add(new Task("Убраться в доме", TaskStatus.IN_PROGRESS, "заставить себя"));
+//================================================================================
+        manager.add(new Epic("Накормить коте", TaskStatus.NEW, "Важнейшее"));
+        manager.add(new SubTask("Заставить себя", TaskStatus.NEW, "Трудно", 1));
+        manager.add(new SubTask("Пойти в магазин", TaskStatus.NEW, "Купить корм", 1));
+        manager.add(new SubTask("Купить корм",TaskStatus.IN_PROGRESS, "Выбрать корм", 1));
+//================================================================================
+        manager.add(new Epic("Накормить Коте", TaskStatus.NEW, "Проверить есть ли СВЕЖАЯ вода"));
+        manager.add(new SubTask("Насыпать корм", TaskStatus.NEW, "Успеть убежать от миски затопчет", 2));
+//================================================================================
         manager.getTaskById(1);
         manager.getTaskById(1);
         manager.getTaskById(2);
@@ -39,7 +39,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         manager.getSubtaskById(4);
         manager.getSubtaskById(5);
         System.out.println(manager);
-
+     //   managers.loadFromFile();
     }
 
     private FileBackedTasksManager() {
@@ -87,6 +87,27 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
     }
 
     @Override
+    public Task getTaskById(int id) {
+        Task task = super.getTaskById(id);
+        save();
+        return task;
+    }
+
+    @Override
+    public Epic getEpicById(int id) {
+        Epic epic = super.getEpicById(id);
+        save();
+        return  epic;
+    }
+
+    @Override
+    public SubTask getSubtaskById(int id) {
+        SubTask subtask = super.getSubtaskById(id);
+        save();
+        return subtask;
+    }
+
+    @Override
     public void removeAllTasks() {
         super.removeAllTasks();
         save();
@@ -118,21 +139,21 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
     }
 
 
-    private void save() {
+    public void save() {
         try {
             Path path = Path.of("resources\\file.csv");
             final String head = "id,type,name,status,description,epic" + System.lineSeparator();
 
             String data = head +
                     taskToString(this) + System.lineSeparator() +
-                    historyToString(historyManager);
+                    HistoryManager.historyToString(historyManager);
             Files.writeString(path, data);
         } catch (IOException e) {
                 throw new ManagerSaveException("Ошибка, при записи файла произошел сбой!");
         }
     }
 
-    private void loadFromFile() {
+    public void loadFromFile() {
         String content = readFileContentsOrNull("resources\\file.csv");
         if (content != null) {
             String[] lines = content.split("\r?\n");
@@ -141,28 +162,28 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                 if (line.length() != 0 & line.length() > 3) {
                     String[] parts = line.split(",");
                     int id = Integer.parseInt(parts[0]);
-                    String type = parts[1];
+                    Types type = Types.valueOf(parts[1]);
                     String name = parts[2];
                     TaskStatus status = TaskStatus.valueOf(parts[3]);
                     String description = parts[4];
                     int idEpic = 0;
-                    if (line.length() > 4) {
+                    if (line.length() > 3) {
                         idEpic = Integer.parseInt(parts[5]);
                     }
                     if (type.equals("Task")) {
-                        Task task1 = new Task(name, description, status);
+                        Task task1 = new Task(name, status, description);
                         task1.setId(id);
                         task1.setStatus(status);
                         taskArray.put(id, task1);
                     }
                     if (type.equals("Epic")) {
-                        Epic epic1 = new Epic(name, description, status);
+                        Epic epic1 = new Epic(name, status, description);
                         epic1.setId(id);
                         epic1.setStatus(status);
                         epicHash.put(id, epic1);
                     }
                     if (type.equals("SubTask")) {
-                        SubTask subTask1 = new SubTask(name, description, status, idEpic);
+                        SubTask subTask1 = new SubTask(name, status, description, idEpic);
                         subTask1.setId(id);
                         subTask1.setStatus(status);
                         subEpicHash.put(id, subTask1);
@@ -178,19 +199,30 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         }
     }
 
-    private static String historyToString(HistoryManager manager) {
-        List<Task> list = manager.getHistory();
-        if (list.isEmpty()) {
-            return "";
-        }
-        StringBuilder builder = new StringBuilder();
-        for (Task task : list) {
-            builder.append(task.getId()).append(",");
-        }
-        if (builder.length() > 0) {
-            builder.setLength(builder.length() - 1);
-        }
-        return builder.toString();
+//    private static String historyToString(HistoryManager manager) {
+//        List<Task> list = manager.getHistory();
+//        if (list.isEmpty()) {
+//            return "";
+//        }
+//        StringBuilder builder = new StringBuilder();
+//        for (Task task : list) {
+//            builder.append(task.getId()).append(",");
+//        }
+//        if (builder.length() > 0) {
+//            builder.setLength(builder.length() - 1);
+//        }
+//        return builder.toString();
+//    }
+
+    private String toString(Task task) {
+        return String.join(",",
+                String.valueOf(task.getId()),
+                task.getClass().getSimpleName().toUpperCase(),
+                task.getTitle(),
+                String.valueOf(task.getStatus()),
+                task.getDescription(),
+                String.valueOf(task instanceof SubTask ? ((SubTask) task).getEpicId() : "")
+        );
     }
 
     private String taskToString(TaskManager  taskmanager) {
@@ -200,7 +232,8 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         taskDump.addAll(epicHash.values());
         taskDump.addAll(subEpicHash.values());
         for (Task task1 : taskDump) {
-            sb.append(task1.toString()).append(",").append(System.lineSeparator());
+            //sb.append(task1.toString()).append(",").append(System.lineSeparator());
+            sb.append(toString(task1)).append(System.lineSeparator());
         }
         return sb.toString();
     }

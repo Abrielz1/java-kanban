@@ -10,7 +10,7 @@ public class Task {
     final String description;
     TaskStatus taskStatus;
 
-    public Task(String name, String description, TaskStatus status) {
+    public Task(String name, TaskStatus status, String description) {
 
         this.name = name;
         this.description = description;
@@ -46,7 +46,6 @@ public class Task {
         return id + "," +
                 Types.TASK + "," +
                 name + "," +
-                description + "," +
                 description;
     }
 }
