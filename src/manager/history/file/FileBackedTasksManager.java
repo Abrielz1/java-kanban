@@ -22,29 +22,30 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
     public static void main(String[] args) {
         FileBackedTasksManager manager = Managers.getDefaultFileManager();
 
-////================================================================================
-//        manager.add(new Task("Погладить кота",TaskStatus.NEW,  "поймать его"));
-//        manager.add(new Task("Убраться в доме", TaskStatus.IN_PROGRESS, "заставить себя"));
-////================================================================================
-//        manager.add(new Epic("Накормить коте", TaskStatus.NEW, "Важнейшее"));
-//        manager.add(new SubTask("Заставить себя", TaskStatus.NEW, "Трудно", 3));
-//        manager.add(new SubTask("Пойти в магазин", TaskStatus.NEW, "Купить корм", 3));
-//        manager.add(new SubTask("Купить корм",TaskStatus.IN_PROGRESS, "Выбрать корм", 3));
-////================================================================================
-//        manager.add(new Epic("Накормить Коте", TaskStatus.NEW, "Проверить есть ли СВЕЖАЯ вода"));
-//        manager.add(new SubTask("Насыпать корм", TaskStatus.NEW, "Успеть убежать от миски затопчет", 7));
-////================================================================================
-//        manager.getTaskById(1);
-//        manager.getTaskById(1);
-//        manager.getTaskById(2);
-//        manager.getEpicById(3);
-//        manager.getEpicById(3);
-//        manager.getSubtaskById(4);
-//        manager.getSubtaskById(5);
-//        manager.getEpicById(3);
-//
-//        System.out.println(manager);
-       manager.loadFromFile();
+//================================================================================
+        manager.add(new Task("Погладить кота",TaskStatus.NEW,  "поймать его"));
+        manager.add(new Task("Убраться в доме", TaskStatus.IN_PROGRESS, "заставить себя"));
+//================================================================================
+        manager.add(new Epic("Накормить коте", TaskStatus.NEW, "Важнейшее"));
+        manager.add(new SubTask("Заставить себя", TaskStatus.NEW, "Трудно", 3));
+        manager.add(new SubTask("Пойти в магазин", TaskStatus.NEW, "Купить корм", 3));
+        manager.add(new SubTask("Купить корм",TaskStatus.IN_PROGRESS, "Выбрать корм", 3));
+//================================================================================
+        manager.add(new Epic("Накормить Коте", TaskStatus.NEW, "Проверить есть ли СВЕЖАЯ вода"));
+        manager.add(new SubTask("Насыпать корм", TaskStatus.NEW, "Успеть убежать от миски затопчет", 7));
+//================================================================================
+        manager.getTaskById(1);
+        manager.getTaskById(1);
+        manager.getTaskById(2);
+        manager.getEpicById(3);
+        manager.getEpicById(3);
+        manager.getSubtaskById(4);
+        manager.getSubtaskById(5);
+        manager.getEpicById(3);
+        manager.removeTaskById(1);
+        manager.add(new Task("Погладить кота",TaskStatus.NEW,  "поймать его"));
+        System.out.println(manager);
+    //   manager.loadFromFile();
     }
 
 
