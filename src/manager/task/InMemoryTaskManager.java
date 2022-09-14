@@ -112,10 +112,8 @@ public class InMemoryTaskManager implements TaskManager {
                 break;
             } else if (subEpicHash.get(id).getStatus() == TaskStatus.IN_PROGRESS) {
                 epic.setStatus(TaskStatus.IN_PROGRESS);
-
             } else if (epic.getStatus() == TaskStatus.DONE && subEpicHash.get(id).getStatus() == TaskStatus.NEW) {
                 epic.setStatus(TaskStatus.IN_PROGRESS);
-
             }
         }
     }

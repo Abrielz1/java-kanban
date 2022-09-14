@@ -8,4 +8,4 @@ id,type,name,status,description,epic
 6,SUBTASK,Купить корм,IN_PROGRESS,Выбрать корм,3
 8,SUBTASK,Насыпать корм,NEW,Успеть убежать от миски затопчет,7
 
-1,2,3,4,5
+1,2,4,5,3,

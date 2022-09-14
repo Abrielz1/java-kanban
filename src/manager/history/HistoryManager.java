@@ -19,8 +19,6 @@ public interface HistoryManager {
             sb.append(task.getId()).append(",");
         }
 
-        sb.setLength(sb.length() - 1);
-
         return sb.toString();
     }
 }

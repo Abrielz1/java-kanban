@@ -8,7 +8,6 @@ import manager.Managers;
 import manager.history.HistoryManager;
 import manager.history.ManagerSaveException;
 import manager.task.InMemoryTaskManager;
-import manager.task.TaskManager;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -20,9 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 public class FileBackedTasksManager extends InMemoryTaskManager {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         FileBackedTasksManager manager = Managers.getDefaultFileManager();
-//
+
 ////================================================================================
 //        manager.add(new Task("Погладить кота",TaskStatus.NEW,  "поймать его"));
 //        manager.add(new Task("Убраться в доме", TaskStatus.IN_PROGRESS, "заставить себя"));
@@ -42,8 +41,10 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 //        manager.getEpicById(3);
 //        manager.getSubtaskById(4);
 //        manager.getSubtaskById(5);
+//        manager.getEpicById(3);
+//
 //        System.out.println(manager);
-       // manager.loadFromFile();
+       manager.loadFromFile();
     }
 
 
@@ -147,7 +148,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
             final String head = "id,type,name,status,description,epic" + System.lineSeparator();
 
             String data = head +
-                    taskToString(this) + System.lineSeparator() +
+                    taskToString() + System.lineSeparator() +
                     HistoryManager.historyToString(historyManager);
             Files.writeString(path, data);
         } catch (IOException e) {
@@ -223,7 +224,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                 String.valueOf(task instanceof SubTask ? ((SubTask) task).getEpicId() : ""));
     }
 
-    private String taskToString(TaskManager taskmanager) {
+    private String taskToString() {
         List<Task> taskDump = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
         taskDump.addAll(taskArray.values());
