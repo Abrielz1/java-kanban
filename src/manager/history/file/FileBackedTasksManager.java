@@ -6,6 +6,7 @@ import constructor.Task;
 import constructor.status.TaskStatus;
 import manager.Managers;
 import manager.history.HistoryManager;
+import manager.history.ManagerSaveException;
 import manager.task.InMemoryTaskManager;
 import manager.task.TaskManager;
 
@@ -53,7 +54,6 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         int id = super.add(task);
         save();
         return id;
-
     }
 
     @Override
@@ -143,7 +143,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 
     public void save() {
         try {
-            Path path = Path.of("resources\\file.csv");
+            Path path = Path.of(PATH);
             final String head = "id,type,name,status,description,epic" + System.lineSeparator();
 
             String data = head +
@@ -160,7 +160,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 
         Map<Integer, Task> allTasks = new HashMap<>();
         try {
-            String[] lines = Files.readString(Path.of("resources\\file.csv"), StandardCharsets.UTF_8).split("\r\n");
+            String[] lines = Files.readString(Path.of(PATH), StandardCharsets.UTF_8).split(System.lineSeparator());
             if (lines.length < 2) return;
             for (int i = 1; i < lines.length; i++) {
                 String line = lines[i];
@@ -190,7 +190,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                         String title = lineContents[2];
                         TaskStatus status = Enum.valueOf(TaskStatus.class, lineContents[3]);
                         String description = lineContents[4];
-                       int epicId = Integer.parseInt(lineContents[5]);
+                        int epicId = Integer.parseInt(lineContents[5]);
                         this.subEpicHash.put(id, new SubTask(id, types, title, status, description, epicId));
                         if (getIdCounter() <= id) setIdCounter(++id);
                     }
@@ -213,8 +213,6 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         }
     }
 
-
-
     private String toString(Task task) {
         return String.join(",",
                 String.valueOf(task.getId()),
@@ -235,12 +233,5 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
             sb.append(toString(task1)).append(System.lineSeparator());
         }
         return sb.toString();
-    }
-
-
-    static class ManagerSaveException extends RuntimeException {
-        public ManagerSaveException(final String message) {
-            super(message);
-        }
     }
 }

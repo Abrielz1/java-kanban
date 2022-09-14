@@ -7,7 +7,6 @@ public class SubTask extends Task {
 
     private final int epicId;
 
-
     public SubTask(String name, TaskStatus status, String description, int epicID) {
         super(name, status, description);
         this.epicId = epicID;
@@ -21,7 +20,6 @@ public class SubTask extends Task {
     public int getEpicId() {
         return epicId;
     }
-
 
     @Override
     public String toString() {

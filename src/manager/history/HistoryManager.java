@@ -19,11 +19,7 @@ public interface HistoryManager {
             sb.append(task.getId()).append(",");
         }
 
-        if (sb.isEmpty()) {
-            sb.append(0);
-        } else {
-            sb.setLength(sb.length() - 1);
-        }
+        sb.setLength(sb.length() - 1);
 
         return sb.toString();
     }
