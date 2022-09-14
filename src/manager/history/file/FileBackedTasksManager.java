@@ -41,11 +41,19 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         manager.getEpicById(3);
         manager.getSubtaskById(4);
         manager.getSubtaskById(5);
-        manager.getEpicById(3);
-        manager.removeTaskById(1);
+        manager.getSubtaskById(6);
+        manager.getEpicById(7);
+        manager.getSubtaskById(8);
+//        manager.getEpicById(3);
+//         manager.removeTaskById(1);
         manager.add(new Task("Погладить кота",TaskStatus.NEW,  "поймать его"));
+        manager.removeEpicById(7);
+        manager.removeEpicById(3);
+//        manager.removeSubtaskById(4);
+//        manager.removeSubtaskById(5);
+//        manager.removeSubtaskById(6);
         System.out.println(manager);
-    //   manager.loadFromFile();
+        //   manager.loadFromFile();
     }
 
 

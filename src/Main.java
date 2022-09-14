@@ -1,7 +1,4 @@
-import constructor.Epic;
-import constructor.SubTask;
-import constructor.Task;
-import constructor.status.TaskStatus;
+
 import manager.Managers;
 import manager.history.file.FileBackedTasksManager;
 
@@ -10,6 +7,6 @@ public class Main {
 
         FileBackedTasksManager taskManager = Managers.getDefaultFileManager();
 
-        //taskManager.loadFromFile();
+        taskManager.loadFromFile();
     }
 }
