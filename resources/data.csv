@@ -1,6 +1,6 @@
 id,type,name,status,description,epic
+1,TASK,Погладить кота,NEW,поймать его,
 2,TASK,Убраться в доме,IN_PROGRESS,заставить себя,
-9,TASK,Погладить кота,NEW,поймать его,
 3,EPIC,Накормить коте,IN_PROGRESS,Важнейшее,
 7,EPIC,Накормить Коте,NEW,Проверить есть ли СВЕЖАЯ вода,
 4,SUBTASK,Заставить себя,NEW,Трудно,3
@@ -8,4 +8,4 @@ id,type,name,status,description,epic
 6,SUBTASK,Купить корм,IN_PROGRESS,Выбрать корм,3
 8,SUBTASK,Насыпать корм,NEW,Успеть убежать от миски затопчет,7
 
-2,4,5,3,
+1,2,3,4,5,6,7,8,

@@ -44,16 +44,16 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         manager.getSubtaskById(6);
         manager.getEpicById(7);
         manager.getSubtaskById(8);
-//        manager.getEpicById(3);
-//         manager.removeTaskById(1);
+        manager.getEpicById(3);
+         manager.removeTaskById(1);
         manager.add(new Task("Погладить кота",TaskStatus.NEW,  "поймать его"));
         manager.removeEpicById(7);
         manager.removeEpicById(3);
-//        manager.removeSubtaskById(4);
-//        manager.removeSubtaskById(5);
-//        manager.removeSubtaskById(6);
+        manager.removeSubtaskById(4);
+        manager.removeSubtaskById(5);
+        manager.removeSubtaskById(6);
         System.out.println(manager);
-        //   manager.loadFromFile();
+           //manager.loadFromFile();
     }
 
 
@@ -202,6 +202,9 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                         String description = lineContents[4];
                         int epicId = Integer.parseInt(lineContents[5]);
                         this.subEpicHash.put(id, new SubTask(id, types, title, status, description, epicId));
+                        if (epicHash.containsKey(epicId)) {
+                            epicHash.get(epicId).getSubtaskId().add(id);
+                        }
                         if (getIdCounter() <= id) setIdCounter(++id);
                     }
                 }
