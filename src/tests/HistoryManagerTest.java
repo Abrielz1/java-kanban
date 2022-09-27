@@ -6,7 +6,6 @@ import constructor.status.TaskStatus;
 import manager.history.HistoryManager;
 import manager.history.InMemoryHistoryManager;
 import manager.history.file.Types;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -17,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HistoryManagerTest extends InMemoryHistoryManager {
 
-       @Test
+    @Test
     void addHistoryAndRemoveHistoryAndGetHistoryTest() {
         HistoryManager manager = new InMemoryHistoryManager();
         Epic epic = new Epic(1, Types.EPIC, "new epic", TaskStatus.NEW, "test description");

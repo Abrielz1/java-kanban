@@ -13,7 +13,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     @Override
     public void addHistory(Task task) {
         Node<Task> node = linkLast(task);
-
+        if (task == null) return;
         if (history.containsKey(task.getId())) {
             removeNode(history.get(task.getId()));
         }
@@ -31,6 +31,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     public List<Task> getHistory() {
         return getTasks();
     }
+
 
     private List<Task> getTasks() {
         List<Task> tasks = new ArrayList<>();

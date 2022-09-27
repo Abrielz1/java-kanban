@@ -3,6 +3,7 @@ package manager.task;
 import constructor.Epic;
 import constructor.SubTask;
 import constructor.Task;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -11,7 +12,9 @@ import java.util.Set;
 public interface TaskManager {
 
     public Map<Integer, Task> getTasks();
+
     public Map<Integer, Epic> getEpics();
+
     public Map<Integer, SubTask> getSubtasks();
 
     Task getTaskById(int id);
