@@ -59,6 +59,12 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
           manager.loadFromFile();
     }
 
+    public static FileBackedTasksManager loadedFromFileTasksManager() {
+        var fileManager = new FileBackedTasksManager();
+        fileManager.loadFromFile();
+        return fileManager;
+    }
+
 
     private final static String PATH = "resources\\data.csv";
 
