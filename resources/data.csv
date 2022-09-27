@@ -1,7 +1,7 @@
 id,type,name,status,description,epic
-1,TASK,Погладить кота,NEW,поймать его,2022-09-25T13:30:15,PT30M,2022-09-25T14:00:15,
-2,EPIC,Накормить коте,NEW,Важнейшее,null,null,null,
-3,SUBTASK,Заставить себя,NEW,Трудно,2022-09-27T17:55:37.805501800,PT30M,2022-09-27T18:25:37.805501800,3
-4,SUBTASK,Пойти в магазин,NEW,Купить корм,2022-09-24T10:00:15,PT45M,2022-09-24T10:45:15,3
-5,SUBTASK,Купить корм,IN_PROGRESS,Выбрать корм,2022-09-25T11:00:15,PT2H,2022-09-25T13:00:15,3
+1,EPIC,new epic,NEW,test description,2022-09-26T18:00,PT2H30M,2022-09-26T20:30,
+2,SUBTASK,subtask 1,NEW,test description,2022-09-26T20:00,PT30M,2022-09-26T20:30,1
+3,SUBTASK,subtask 2,NEW,test description,2022-09-26T18:00,PT30M,2022-09-26T18:30,1
+4,SUBTASK,subtask 3,NEW,test description,2022-09-26T19:00,PT45M,2022-09-26T19:45,1
 
+4,1,2,
