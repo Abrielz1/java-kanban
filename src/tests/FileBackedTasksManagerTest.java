@@ -67,7 +67,6 @@ public class FileBackedTasksManagerTest extends TaskManagerTest<FileBackedTasksM
         Integer[] forComparison = {s3.getId(), epic.getId(), s1.getId()};
         List<Task> history = fileManagerFromFile.getHistory();
         Integer[] historyFromFile = {history.get(4).getId(), history.get(5).getId(), history.get(6).getId()};
-        System.out.println(history);
 
         assertEquals("new epic", fileManagerFromFile.getEpics().get(1).getTitle());
         assertEquals("subtask 1", fileManagerFromFile.getSubtasks().get(2).getTitle());
