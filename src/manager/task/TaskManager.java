@@ -5,6 +5,7 @@ import constructor.SubTask;
 import constructor.Task;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 public interface TaskManager {
@@ -27,7 +28,7 @@ public interface TaskManager {
 
     void update(Task task);
 
-    void update(Epic epic);
+    int update(Epic epic);
 
     void update(SubTask subtask);
 
@@ -44,5 +45,15 @@ public interface TaskManager {
     List<SubTask> getAllSubtasksByEpic(int id);
 
     List<Task> getHistory();
+
+    void intersectionCheck();
+
+    Set<Task> getPrioritizedTasks();
+
+    void getTaskEndTime(Task task);
+
+    void getEpicTimesAndDuration(Epic epic);
+
+    void getSubtaskEndTime(SubTask subtask);
 
 }

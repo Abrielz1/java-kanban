@@ -13,6 +13,8 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,38 +24,39 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
     public static void main(String[] args) {
         FileBackedTasksManager manager = Managers.getDefaultFileManager();
 
-//================================================================================
-        manager.add(new Task("Погладить кота",TaskStatus.NEW,  "поймать его"));
-        manager.add(new Task("Убраться в доме", TaskStatus.IN_PROGRESS, "заставить себя"));
-//================================================================================
-        manager.add(new Epic("Накормить коте", TaskStatus.NEW, "Важнейшее"));
-        manager.add(new SubTask("Заставить себя", TaskStatus.NEW, "Трудно", 3));
-        manager.add(new SubTask("Пойти в магазин", TaskStatus.NEW, "Купить корм", 3));
-        manager.add(new SubTask("Купить корм",TaskStatus.IN_PROGRESS, "Выбрать корм", 3));
-//================================================================================
-        manager.add(new Epic("Накормить Коте", TaskStatus.NEW, "Проверить есть ли СВЕЖАЯ вода"));
-        manager.add(new SubTask("Насыпать корм", TaskStatus.NEW, "Успеть убежать от миски затопчет", 7));
-//================================================================================
-        manager.getTaskById(1);
-        manager.getTaskById(1);
-        manager.getTaskById(2);
-        manager.getEpicById(3);
-        manager.getEpicById(3);
-        manager.getSubtaskById(4);
-        manager.getSubtaskById(5);
-        manager.getSubtaskById(6);
-        manager.getEpicById(7);
-        manager.getSubtaskById(8);
-        manager.getEpicById(3);
-         manager.removeTaskById(1);
-        manager.add(new Task("Погладить кота",TaskStatus.NEW,  "поймать его"));
-        manager.removeEpicById(7);
-        manager.removeEpicById(3);
-        manager.removeSubtaskById(4);
-        manager.removeSubtaskById(5);
-        manager.removeSubtaskById(6);
-        System.out.println(manager);
-           //manager.loadFromFile();
+//////================================================================================
+//        manager.add(new Task("Погладить кота",TaskStatus.NEW,  "поймать его", LocalDateTime.of(2022, 9, 25, 13, 30, 15), Duration.ofMinutes(30)));
+////        manager.add(new Task("Убраться в доме", TaskStatus.IN_PROGRESS, "заставить себя"));
+//////================================================================================
+//        manager.add(new Epic("Накормить коте", TaskStatus.NEW, "Важнейшее"));
+//        manager.add(new SubTask("Заставить себя", TaskStatus.NEW, "Трудно", 3, LocalDateTime.now(), Duration.ofMinutes(30)));
+//        manager.add(new SubTask("Пойти в магазин", TaskStatus.NEW, "Купить корм", 3, LocalDateTime.of(2022, 9, 24, 10, 0, 15), Duration.ofMinutes(45)));
+//        manager.add(new SubTask("Купить корм",TaskStatus.IN_PROGRESS, "Выбрать корм", 3, LocalDateTime.of(2022, 9, 25, 11, 0, 15), Duration.ofMinutes(120)));
+//////================================================================================
+//        manager.add(new Epic("Накормить Коте", TaskStatus.NEW, "Проверить есть ли СВЕЖАЯ вода"));
+//        manager.add(new SubTask("Насыпать корм", TaskStatus.NEW, "Успеть убежать от миски затопчет", 7));
+////================================================================================
+//        manager.getTaskById(1);
+//        manager.getTaskById(1);
+//        manager.getTaskById(2);
+//        manager.getEpicById(3);
+//        manager.getEpicById(3);
+//        manager.getSubtaskById(4);
+//        manager.getSubtaskById(5);
+//        manager.getSubtaskById(6);
+//        manager.getEpicById(7);
+//        manager.getSubtaskById(8);
+//        manager.getEpicById(3);
+////        manager.removeTaskById(1);//
+//        manager.add(new Task("Погладить кота",TaskStatus.NEW,  "поймать его"));
+////        manager.removeEpicById(7);
+//        manager.removeEpicById(3);
+////        manager.removeSubtaskById(4);
+//////        manager.removeSubtaskById(5);
+//////        manager.removeSubtaskById(6);
+//        manager.update(new SubTask("Пойти в магазин", TaskStatus.DONE, "Купить корм", 3));
+////        System.out.println(manager);
+          manager.loadFromFile();
     }
 
 
@@ -87,9 +90,10 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
     }
 
     @Override
-    public void update(Epic epic) {
-        super.update(epic);
+    public int update(Epic epic) {
+        int id = super.update(epic);
         save();
+        return id;
     }
 
     @Override
@@ -140,12 +144,18 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 
     @Override
     public void removeEpicById(int id) {
+        List<Integer> subtasksInEpic = epicHash.get(id).getSubtaskId();
+        for (int subtaskId : subtasksInEpic) {
+            prioritizedTasks.remove(subEpicHash.get(subtaskId));
+        }
+        prioritizedTasks.remove(epicHash.get(id));
         super.removeEpicById(id);
         save();
     }
 
     @Override
     public void removeSubtaskById(Integer id) {
+        prioritizedTasks.remove(subEpicHash.get(id));
         super.removeSubtaskById(id);
         save();
     }
@@ -178,46 +188,68 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                 if (lineContents.length >= 5) {
                     if (lineContents[1].equals("TASK")) {
                         int id = Integer.parseInt(lineContents[0]);
-                        Types types = Enum.valueOf(Types.class, lineContents[1]);
                         String title = lineContents[2];
                         TaskStatus status = Enum.valueOf(TaskStatus.class, lineContents[3]);
                         String description = lineContents[4];
-                        this.taskArray.put(id, new Task(id, types, title, status, description));
+                        Duration duration = null;
+                        if (!lineContents[6].equals("null")) duration = Duration.parse(lineContents[6]);
+                        LocalDateTime startTime = null;
+                        if (!lineContents[5].equals("null")) startTime = LocalDateTime.parse(lineContents[5]);
+                        Task task = new Task(id, Types.TASK, title, status, description, startTime, duration);
+                        if (!lineContents[6].equals("null")) task.setEndTime(LocalDateTime.parse(lineContents[7]));
+                        taskArray.put(id, task);
                         if (getIdCounter() <= id) setIdCounter(++id);
+                        prioritizedTasks.add(task);
                     }
                     if (lineContents[1].equals("EPIC")) {
                         int id = Integer.parseInt(lineContents[0]);
-                        Types types = Enum.valueOf(Types.class, lineContents[1]);
                         String title = lineContents[2];
                         TaskStatus status = Enum.valueOf(TaskStatus.class, lineContents[3]);
                         String description = lineContents[4];
-                        this.epicHash.put(id, new Epic(id, types, title, status, description));
+                        Epic epic = new Epic(id, Types.EPIC, title, status, description);
+                        epicHash.put(id, epic);
+                        for (SubTask subtask : subEpicHash.values()) {
+                            if (epicHash.containsKey(subtask.getEpicId())) {
+                                epicHash.get(subtask.getEpicId()).getSubtaskId().add(subtask.getId());
+                            }
+                        }
+                        getEpicTimesAndDuration(epicHash.get(id));
                         if (getIdCounter() <= id) setIdCounter(++id);
                     }
                     if (lineContents[1].equals("SUBTASK")) {
                         int id = Integer.parseInt(lineContents[0]);
-                        Types types = Enum.valueOf(Types.class, lineContents[1]);
                         String title = lineContents[2];
                         TaskStatus status = Enum.valueOf(TaskStatus.class, lineContents[3]);
                         String description = lineContents[4];
-                        int epicId = Integer.parseInt(lineContents[5]);
-                        this.subEpicHash.put(id, new SubTask(id, types, title, status, description, epicId));
+                        Duration duration = null;
+                        if (!lineContents[6].equals("null")) duration = Duration.parse(lineContents[6]);
+                        LocalDateTime startTime = null;
+                        if (!lineContents[5].equals("null")) startTime = LocalDateTime.parse(lineContents[5]);
+                        int epicId = Integer.parseInt(lineContents[8]);
+                        SubTask subtask = new SubTask(id, Types.SUBTASK, title, status, description, epicId, startTime, duration);
+                        if (!lineContents[6].equals("null")) subtask.setEndTime(LocalDateTime.parse(lineContents[7]));
+                        subEpicHash.put(id, subtask);
                         if (epicHash.containsKey(epicId)) {
                             epicHash.get(epicId).getSubtaskId().add(id);
                         }
                         if (getIdCounter() <= id) setIdCounter(++id);
+                        prioritizedTasks.add(subtask);
+                        if (epicHash.containsKey(subtask.getEpicId())) {
+                            getEpicTimesAndDuration(epicHash.get(subtask.getEpicId()));
+                        }
                     }
-                }
 
-            }
-            allTasks.putAll(getTasks());
-            allTasks.putAll(getEpics());
-            allTasks.putAll(getSubtasks());
-            if (lines[lines.length - 2].isBlank() && lines.length >= 4) {
-                String historyLine = lines[lines.length - 1];
-                String[] historyLineContents = historyLine.split(",");
-                for (String s : historyLineContents) {
-                    historyManager.addHistory(allTasks.get(Integer.parseInt(s)));
+                }
+                allTasks.putAll(getTasks());
+                allTasks.putAll(getEpics());
+                allTasks.putAll(getSubtasks());
+                if (lines.length < 4) return;
+                if (lines[lines.length - 2].isBlank() && lines.length >= 4) {
+                    String historyLine = lines[lines.length - 1];
+                    String[] historyLineContents = historyLine.split(",");
+                    for (String s : historyLineContents) {
+                        historyManager.addHistory(allTasks.get(Integer.parseInt(s)));
+                    }
                 }
             }
         }
@@ -233,6 +265,9 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                 task.getTitle(),
                 String.valueOf(task.getStatus()),
                 task.getDescription(),
+                String.valueOf(task.getStartTime()),
+                String.valueOf(task.getDuration()),
+                String.valueOf(task.getEndTime()),
                 String.valueOf(task instanceof SubTask ? ((SubTask) task).getEpicId() : ""));
     }
 

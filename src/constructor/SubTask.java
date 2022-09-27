@@ -3,17 +3,20 @@ package constructor;
 import constructor.status.TaskStatus;
 import manager.history.file.Types;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public class SubTask extends Task {
 
     private final int epicId;
 
-    public SubTask(String name, TaskStatus status, String description, int epicID) {
-        super(name, status, description);
-        this.epicId = epicID;
+    public SubTask(String name, TaskStatus status, String description, int epicId, LocalDateTime startTime, Duration duration) {
+        super(name, status, description, startTime, duration);
+        this.epicId = epicId;
     }
 
-    public SubTask(int id, Types taskType, String name, TaskStatus status, String description, int epicId) {
-        super(id, taskType, name, status, description);
+    public SubTask(int id, Types taskType, String name, TaskStatus status, String description, int epicId, LocalDateTime startTime, Duration duration) {
+        super(id, taskType, name, status, description, startTime, duration);
         this.epicId = epicId;
     }
 
@@ -28,6 +31,8 @@ public class SubTask extends Task {
                 name + "," +
                 taskStatus + "," +
                 description + "," +
+                startTime + "," +
+                duration + "," +
                 epicId;
     }
 }

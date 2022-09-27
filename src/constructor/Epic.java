@@ -3,6 +3,8 @@ package constructor;
 import constructor.status.TaskStatus;
 import manager.history.file.Types;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,12 +12,12 @@ public class Epic extends Task {
     private final List<Integer> subTaskId;
 
     public Epic(String name, TaskStatus status, String description) {
-        super(name, status, description);
+        super(name, status, description, null, null);
         subTaskId = new ArrayList<>();
     }
 
     public Epic(int id, Types taskType, String name, TaskStatus status, String description) {
-        super(id, taskType, name, status, description);
+        super(id, taskType, name, status, description, null, null);
         subTaskId = new ArrayList<>();
     }
 
@@ -29,7 +31,9 @@ public class Epic extends Task {
                 Types.EPIC + "," +
                 name + "," +
                 taskStatus + "," +
-                description;
+                description + "," +
+                startTime + "," +
+                duration;
     }
 }
 
