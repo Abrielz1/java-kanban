@@ -163,13 +163,13 @@ abstract class TaskManagerTest<T extends TaskManager> {
     }
 
     @Test
-    void removeTaskByIdAndEpicByIdAndSubtaskById() {  // падает в обоих
+    void removeTaskByIdAndEpicByIdAndSubtaskById() {
         manager.add(new Task(1, Types.TASK, "Task1", TaskStatus.NEW, "test description",
                 LocalDateTime.of(2022, 9, 26, 18, 0), Duration.ofMinutes(30)));
         manager.add(new Epic(2, Types.EPIC, "new epic", TaskStatus.NEW, "test description"));
         manager.add(new SubTask(3, Types.SUBTASK, "subtask", TaskStatus.NEW, "test description",
                 2, LocalDateTime.of(2022, 9, 26, 18, 0), Duration.ofMinutes(30)));
-        manager.removeTaskById(1); // дохнет на удаления из файлбек
+        manager.removeTaskById(1);
         assertTrue(manager.getTasks().isEmpty());
         manager.removeSubtaskById(3);
         assertTrue(manager.getSubtasks().isEmpty());
