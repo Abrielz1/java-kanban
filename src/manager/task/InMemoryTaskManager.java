@@ -261,6 +261,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void getSubtaskEndTime(SubTask subtask) {
+        if (subtask.getStartTime() == null || subtask.getDuration() == null) return;
         LocalDateTime endTime = subtask.getStartTime().plus(subtask.getDuration());
         subtask.setEndTime(endTime);
         if (epicHash.containsKey(subtask.getEpicId())) {
