@@ -15,6 +15,7 @@ import java.util.*;
 public class InMemoryTaskManager implements TaskManager {
 
     protected Set<Task> prioritizedTasks = new TreeSet<>((o1, o2) -> {
+        if (o1.getStartTime() == null && o2.getStartTime() == null) return o1.getId() - o2.getId();
         if (o1.getStartTime() == null) return 1;
         if (o2.getStartTime() == null) return -1;
         if (o1.getStartTime().isAfter(o2.getStartTime())) return 1;

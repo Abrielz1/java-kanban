@@ -206,10 +206,11 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                 allTasks.putAll(getEpics());
                 allTasks.putAll(getSubtasks());
                 if (lines.length < 4) return;
-                if (lines[lines.length - 2].isBlank() && lines.length >= 4) {
+                if (lines[lines.length - 2].isBlank()) {
                     String historyLine = lines[lines.length - 1];
                     String[] historyLineContents = historyLine.split(",");
                     for (String s : historyLineContents) {
+
                         historyManager.addHistory(allTasks.get(Integer.parseInt(s)));
                     }
                 }
