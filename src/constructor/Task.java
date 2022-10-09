@@ -10,6 +10,7 @@ public class Task {
 
     int id;
     final String name;
+
     final String description;
     TaskStatus taskStatus;
     Types taskType;
@@ -34,6 +35,11 @@ public class Task {
         this.startTime = startTime;
         this.duration = duration;
     }
+
+    public Types getTaskType() {
+        return taskType;
+    }
+
 
     public int getId() {
         return id;
@@ -92,4 +98,18 @@ public class Task {
                 startTime + "," +
                 duration;
     }
+//@Override
+//public String toString() {
+//    return "Task{" +
+//            "id=" + id +
+//            ", type=" + taskType +
+//            ", title='" + name + '\'' +
+//            ", description='" + description + '\'' +
+//            ", status=" + taskStatus +
+//            ", duration=" + duration +
+//            ", startTime=" + startTime +
+//            ", endTime=" + endTime +
+//            '}';
+//}
+
 }

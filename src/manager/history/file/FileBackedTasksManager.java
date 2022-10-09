@@ -21,8 +21,15 @@ import java.util.Map;
 
 public class FileBackedTasksManager extends InMemoryTaskManager {
 
+       private final static String PATH = "resources\\data.csv";
+    private final static String HEAD = "id,type,title,description,status,duration,startTime,endTime,epic\n";
+    public static FileBackedTasksManager loadedFromFileTasksManager () {
+        FileBackedTasksManager fileBackedTasksManager = new FileBackedTasksManager();
+        fileBackedTasksManager.loadFromFile();
+        return fileBackedTasksManager;
+    }
 
-    private final static String PATH = "resources\\data.csv";
+    Map<Integer, Task> allTasks = new HashMap<>();
 
     @Override
     public int add(Task task) {
@@ -138,9 +145,15 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
     }
 
 
-    public void loadFromFile() {
 
-        Map<Integer, Task> allTasks = new HashMap<>();
+    public Map<Integer, Task> getAllTasks() {
+        return allTasks;
+    }
+
+
+    public void loadFromFile() {
+//Map<Integer, Task> allTasks = new HashMap<>();
+
         try {
             String[] lines = Files.readString(Path.of(PATH), StandardCharsets.UTF_8).split(System.lineSeparator());
             if (lines.length < 2) return;
@@ -232,6 +245,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                 String.valueOf(task.getEndTime()),
                 String.valueOf(task instanceof SubTask ? ((SubTask) task).getEpicId() : ""));
     }
+
 
     private String taskToString() {
         List<Task> taskDump = new ArrayList<>();

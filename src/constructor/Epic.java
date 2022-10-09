@@ -35,5 +35,19 @@ public class Epic extends Task {
                 startTime + "," +
                 duration;
     }
+//@Override
+//public String toString() {
+//    return "Epic{" +
+//            "subtaskIDs=" + subTaskId +
+//            ", id=" + id +
+//            ", type=" + taskType +
+//            ", title='" + name + '\'' +
+//            ", description='" + description + '\'' +
+//            ", status=" + taskStatus +
+//            ", duration=" + duration +
+//            ", startTime=" + startTime +
+//            ", endTime=" + endTime +
+//            '}';
+//}
 }
 
