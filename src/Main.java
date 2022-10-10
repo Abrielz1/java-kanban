@@ -5,6 +5,7 @@ import constructor.Task;
 import constructor.status.TaskStatus;
 import manager.Managers;
 import manager.history.file.FileBackedTasksManager;
+import manager.http.KVServer;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -24,6 +25,7 @@ public class Main {
 ////================================================================================
             manager.getTaskById(1);
           // manager.loadFromFile();
+        //new KVServer().start();
 
     }
 }

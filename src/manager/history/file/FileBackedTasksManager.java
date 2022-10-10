@@ -29,7 +29,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         return fileBackedTasksManager;
     }
 
-    Map<Integer, Task> allTasks = new HashMap<>();
+    public Map<Integer, Task> allTasks = new HashMap<>();
 
     @Override
     public int add(Task task) {
