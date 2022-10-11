@@ -16,7 +16,7 @@ public class Main {
         FileBackedTasksManager manager = Managers.getDefaultFileManager();
 
 //================================================================================
-        manager.add(new Task("Погладить кота", TaskStatus.NEW,  "поймать его", LocalDateTime.of(2022, 9, 25, 13, 30, 15), Duration.ofMinutes(30)));
+      //  manager.add(new Task("Погладить кота", TaskStatus.NEW,  "поймать его", LocalDateTime.of(2022, 9, 25, 13, 30, 15), Duration.ofMinutes(30)));
 //================================================================================
         manager.add(new Epic("Накормить коте", TaskStatus.NEW, "Важнейшее"));
         manager.add(new SubTask("Заставить себя", TaskStatus.NEW, "Трудно", 2, LocalDateTime.of(2022,9,25,9,0,10), Duration.ofMinutes(30)));

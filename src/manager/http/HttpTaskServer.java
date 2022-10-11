@@ -50,19 +50,34 @@ public class HttpTaskServer {
             registerTypeAdapter(Duration.class, new DurationAdapter()).
             create();
 
+    static HttpServer httpServer;
 
-    public static void main(String[] args) throws IOException {
-        HttpServer httpServer = HttpServer.create();
-        httpServer.bind(new InetSocketAddress(PORT), 0);
-        httpServer.createContext("/tasks", new TasksHandler());
-        httpServer.start();
-
-
+    public static void main(String[] args) throws IOException {}
+//        HttpServer httpServer = HttpServer.create();
+//        httpServer.bind(new InetSocketAddress(PORT), 0);
+//        httpServer.createContext("/tasks", new TasksHandler());
+      //  httpServer.start();
         //FileBackedTasksManager fileManager = FileBackedTasksManager.loadedFromFileTasksManager();
-        System.out.println("HTTP-сервер запущен на " + PORT + " порту!");
+//        System.out.println("HTTP-сервер запущен на " + PORT + " порту!");
+   public HttpTaskServer() throws IOException {
+            this.httpServer = HttpServer.create(new InetSocketAddress("localhost", PORT), 0);
+            httpServer.createContext("/tasks", new TasksHandler());
+        }
+
+    public void start() {
+
+        System.out.println("Запускаем сервер на порту " + PORT);
+
+        httpServer.start();
     }
 
-    static class TasksHandler implements HttpHandler {
+    public void stop() {
+        System.out.println("Сервер остановлен");
+        httpServer.stop(0);
+    }
+
+    public static class TasksHandler implements HttpHandler {
+
 
         @Override
         public void handle(HttpExchange exchange) throws IOException {

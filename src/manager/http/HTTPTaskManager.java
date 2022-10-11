@@ -30,11 +30,17 @@ public class HTTPTaskManager extends FileBackedTasksManager {
         kvTaskClient = new KVTaskClient(path);
     }
 
+    public void getToken() {
+        kvTaskClient = new KVTaskClient(path);
+        kvTaskClient.register();
+    }
+
     public void saveTasks() throws IOException {
         if (kvTaskClient == null) {
             System.out.println("Требуется регистрация");
             return;
         }
+
         this.loadFromFile();
         kvTaskClient.put("/tasks", gson.toJson(getTasks().values()));
         kvTaskClient.put("/epics", gson.toJson(getEpics().values()));
