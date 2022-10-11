@@ -100,13 +100,13 @@ public class HttpTaskServer {
                     } else if (Pattern.matches("^/tasks/epic$", path)) {
                         response = gson.toJson(fileManager.getEpics().values());
                         rCode = 200;
-                    } else if (path.endsWith("tasks/subtask") && exchange.getRequestURI().getQuery() != null) {
+                    } else if (Pattern.matches("^/tasks/subtask$", path) && exchange.getRequestURI().getQuery() != null) {
                         String query = exchange.getRequestURI().getQuery();
                         String[] queryArray = query.split("=");
                         int id = Integer.parseInt(queryArray[1]);
                         response = gson.toJson(fileManager.getSubtaskById(id));
                         rCode = 200;
-                    } else if (Pattern.matches("^/tasks/subtask$", path) && exchange.getRequestURI().getQuery() != null) {
+                    } else if(Pattern.matches("^/tasks/subtask$", path)) {
                         response = gson.toJson(fileManager.getSubtasks().values());
                         rCode = 200;
                     } else if (Pattern.matches("^/tasks/history$", path)) {

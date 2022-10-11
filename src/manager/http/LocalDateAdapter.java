@@ -15,7 +15,11 @@ public class LocalDateAdapter extends TypeAdapter<LocalDateTime> {
     private static final DateTimeFormatter formatterReader = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm:ss");
     @Override
     public void write(JsonWriter jsonWriter, LocalDateTime localDateTime) throws IOException {
-        jsonWriter.value(localDateTime.format(formatterWriter));
+
+                    jsonWriter.value(localDateTime.format(formatterWriter));
+
+
+
     }
 
     @Override
