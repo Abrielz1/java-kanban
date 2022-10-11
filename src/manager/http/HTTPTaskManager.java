@@ -1,6 +1,7 @@
 package manager.http;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import constructor.Epic;
 import constructor.SubTask;
@@ -9,16 +10,20 @@ import manager.history.file.FileBackedTasksManager;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static manager.history.HistoryManager.historyToString;
 
 public class HTTPTaskManager extends FileBackedTasksManager {
 
+    private static final Gson gson = new GsonBuilder().
+            registerTypeAdapter(LocalDateTime.class, new LocalDateAdapter()).
+            registerTypeAdapter(Duration.class, new DurationAdapter()).
+            create();
     protected KVTaskClient kvTaskClient;
     protected String path;
-
-    protected Gson gson = new Gson();
 
     public HTTPTaskManager(String path) {
         this.path = path;
