@@ -5,13 +5,11 @@ import com.google.gson.GsonBuilder;
 import manager.history.HistoryManager;
 import manager.history.InMemoryHistoryManager;
 import manager.history.file.FileBackedTasksManager;
-import manager.http.DurationAdapter;
 import manager.http.HTTPTaskManager;
 import manager.http.LocalDateAdapter;
 import manager.task.InMemoryTaskManager;
 import manager.task.TaskManager;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Managers {
@@ -32,7 +30,6 @@ public class Managers {
         return new GsonBuilder()
                 .setPrettyPrinting()
                 .registerTypeAdapter(LocalDateTime.class, new LocalDateAdapter())
-                .registerTypeAdapter(Duration.class, new DurationAdapter())
                 .create();
     }
 

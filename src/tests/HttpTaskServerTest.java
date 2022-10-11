@@ -38,7 +38,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 public class HttpTaskServerTest {
     private static Gson gson = new GsonBuilder().
             registerTypeAdapter(LocalDateTime.class, new LocalDateAdapter()).
-            registerTypeAdapter(Duration.class, new DurationAdapter()).
             create();
 
     HttpTaskServer httpTaskServer;
@@ -53,17 +52,17 @@ public class HttpTaskServerTest {
 
     String path = "http://localhost:8080";
 
-    Task task1 = new Task("Погладить кота", TaskStatus.NEW,  "поймать его", LocalDateTime.of(2022, 9, 25, 13, 30, 15), Duration.ofMinutes(30));
+    Task task1 = new Task("Погладить кота", TaskStatus.NEW,  "поймать его", LocalDateTime.of(2022, 9, 25, 13, 30, 15), 30);
 
-    Task task2 = new Task("Потратиться на себя", TaskStatus.NEW, "Сделать себе приятно", LocalDateTime.of(2022, 9, 26, 12, 0, 15), Duration.ofMinutes(30));
+    Task task2 = new Task("Потратиться на себя", TaskStatus.NEW, "Сделать себе приятно", LocalDateTime.of(2022, 9, 26, 12, 0, 15), 30);
 
     Epic epic1 = new Epic("Накормить коте", TaskStatus.NEW, "Важнейшее");
 
-    SubTask subTask1 = new SubTask("Заставить себя", TaskStatus.NEW, "Трудно", 7, LocalDateTime.of(2022,9,25,9,0,10), Duration.ofMinutes(30));
+    SubTask subTask1 = new SubTask("Заставить себя", TaskStatus.NEW, "Трудно", 7, LocalDateTime.of(2022,9,25,9,0,10), 30);
 
-    SubTask subTask2 = new SubTask("Пойти в магазин", TaskStatus.NEW, "Купить корм", 7, LocalDateTime.of(2022, 9, 25, 10, 0, 15), Duration.ofMinutes(45));
+    SubTask subTask2 = new SubTask("Пойти в магазин", TaskStatus.NEW, "Купить корм", 7, LocalDateTime.of(2022, 9, 25, 10, 0, 15), 45);
 
-    SubTask subtask3 = new SubTask("Поесть", TaskStatus.NEW, "Важная задача", 7, LocalDateTime.of(2022, 9, 25, 11, 0, 15),  Duration.ofMinutes(120));
+    SubTask subtask3 = new SubTask("Поесть", TaskStatus.NEW, "Важная задача", 7, LocalDateTime.of(2022, 9, 25, 11, 0, 15),  120);
 
     Epic epic2 = new Epic("Английский", TaskStatus.NEW, "дойти до уровня Native");
 

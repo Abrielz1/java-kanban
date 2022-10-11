@@ -15,7 +15,6 @@ public class KVTaskClient {
 
     private static final Gson gson = new GsonBuilder().
             registerTypeAdapter(LocalDateTime.class, new LocalDateAdapter()).
-            registerTypeAdapter(Duration.class, new DurationAdapter()).
             create();
 
 protected URI url;

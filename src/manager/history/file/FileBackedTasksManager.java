@@ -166,12 +166,11 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                         String title = lineContents[2];
                         TaskStatus status = Enum.valueOf(TaskStatus.class, lineContents[3]);
                         String description = lineContents[4];
-                        Duration duration = null;
-                        if (!lineContents[6].equals("null")) duration = Duration.parse(lineContents[6]);
+                        long duration = Long.parseLong(lineContents[6]);
                         LocalDateTime startTime = null;
                         if (!lineContents[5].equals("null")) startTime = LocalDateTime.parse(lineContents[5]);
                         Task task = new Task(id, Types.TASK, title, status, description, startTime, duration);
-                        if (!lineContents[6].equals("null")) task.setEndTime(LocalDateTime.parse(lineContents[7]));
+                        if (!lineContents[6].equals("null")) task.setEndTime(task.getStartTime().plusMinutes(duration));
                         taskArray.put(id, task);
                         if (getIdCounter() <= id) setIdCounter(++id);
                         prioritizedTasks.add(task);
@@ -196,8 +195,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                         String title = lineContents[2];
                         TaskStatus status = Enum.valueOf(TaskStatus.class, lineContents[3]);
                         String description = lineContents[4];
-                        Duration duration = null;
-                        if (!lineContents[6].equals("null")) duration = Duration.parse(lineContents[6]);
+                        long duration = Long.parseLong(lineContents[6]);
                         LocalDateTime startTime = null;
                         if (!lineContents[5].equals("null")) startTime = LocalDateTime.parse(lineContents[5]);
                         int epicId = Integer.parseInt(lineContents[8]);

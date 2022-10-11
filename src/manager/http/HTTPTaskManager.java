@@ -20,7 +20,6 @@ public class HTTPTaskManager extends FileBackedTasksManager {
 
     private static final Gson gson = new GsonBuilder().
             registerTypeAdapter(LocalDateTime.class, new LocalDateAdapter()).
-            registerTypeAdapter(Duration.class, new DurationAdapter()).
             create();
     protected KVTaskClient kvTaskClient;
     protected String path;

@@ -231,8 +231,8 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void getTaskEndTime(Task task) {
-        if (task.getStartTime() == null || task.getDuration() == null) return;
-        LocalDateTime endTime = task.getStartTime().plus(task.getDuration());
+        if (task.getStartTime() == null || task.getDuration() == 0) return;
+        LocalDateTime endTime = task.getStartTime().plusMinutes(task.getDuration());
         task.setEndTime(endTime);
     }
 
@@ -257,13 +257,13 @@ public class InMemoryTaskManager implements TaskManager {
         }
         epic.setStartTime(start);
         epic.setEndTime(end);
-        epic.setDuration(Duration.between(epic.getStartTime(), epic.getEndTime()));
+        epic.setDuration(Duration.between(epic.getStartTime(), epic.getEndTime()).toMinutes());
     }
 
     @Override
     public void getSubtaskEndTime(SubTask subtask) {
-        if (subtask.getStartTime() == null || subtask.getDuration() == null) return;
-        LocalDateTime endTime = subtask.getStartTime().plus(subtask.getDuration());
+        if (subtask.getStartTime() == null || subtask.getDuration() == 0) return;
+        LocalDateTime endTime = subtask.getStartTime().plusMinutes(subtask.getDuration());
         subtask.setEndTime(endTime);
         if (epicHash.containsKey(subtask.getEpicId())) {
             getEpicTimesAndDuration(epicHash.get(subtask.getEpicId()));

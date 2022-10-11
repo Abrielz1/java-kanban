@@ -47,7 +47,6 @@ public class HttpTaskServer {
     private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
     private static Gson gson = new GsonBuilder().
             registerTypeAdapter(LocalDateTime.class, new LocalDateAdapter()).
-            registerTypeAdapter(Duration.class, new DurationAdapter()).
             create();
 
     static HttpServer httpServer;

@@ -12,12 +12,12 @@ public class Epic extends Task {
     private final List<Integer> subTaskId;
 
     public Epic(String name, TaskStatus status, String description) {
-        super(name, status, description, null, null);
+        super(name, status, description, null, 0);
         subTaskId = new ArrayList<>();
     }
 
     public Epic(int id, Types taskType, String name, TaskStatus status, String description) {
-        super(id, taskType, name, status, description, null, null);
+        super(id, taskType, name, status, description, null, 0);
         subTaskId = new ArrayList<>();
     }
 
