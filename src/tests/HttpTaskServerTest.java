@@ -53,11 +53,11 @@ public class HttpTaskServerTest {
 
     Epic epic1 = new Epic("Накормить коте", TaskStatus.NEW, "Важнейшее");
 
-    SubTask subTask1 = new SubTask("Заставить себя", TaskStatus.NEW, "Трудно", 7, LocalDateTime.of(2022,9,25,9,0,10), 30);
+    SubTask subTask1 = new SubTask("Заставить себя", TaskStatus.NEW, "Трудно", 3, LocalDateTime.of(2022,9,25,9,0,10), 30);
 
-    SubTask subTask2 = new SubTask("Пойти в магазин", TaskStatus.NEW, "Купить корм", 7, LocalDateTime.of(2022, 9, 25, 10, 0, 15), 45);
+    SubTask subTask2 = new SubTask("Пойти в магазин", TaskStatus.NEW, "Купить корм", 3, LocalDateTime.of(2022, 9, 25, 10, 0, 15), 45);
 
-    SubTask subtask3 = new SubTask("Поесть", TaskStatus.NEW, "Важная задача", 7, LocalDateTime.of(2022, 9, 25, 11, 0, 15),  120);
+    SubTask subtask3 = new SubTask("Поесть", TaskStatus.NEW, "Важная задача", 3, LocalDateTime.of(2022, 9, 25, 11, 0, 15),  120);
 
     Epic epic2 = new Epic("Купить стриралку", TaskStatus.NEW, "Надо новую");
 
@@ -76,11 +76,11 @@ public class HttpTaskServerTest {
 
             fileManager.add(new Epic("Накормить коте", TaskStatus.NEW, "Важнейшее"));
 
-            fileManager.add(new SubTask("Заставить себя", TaskStatus.NEW, "Трудно", 7, LocalDateTime.of(2022,9,25,9,0,10), 30));
+            fileManager.add(new SubTask("Заставить себя", TaskStatus.NEW, "Трудно", 3, LocalDateTime.of(2022,9,25,9,0,10), 30));
 
-            fileManager.add(new SubTask("Пойти в магазин", TaskStatus.NEW, "Купить корм", 7, LocalDateTime.of(2022, 9, 25, 10, 0, 15), 45));
+            fileManager.add(new SubTask("Пойти в магазин", TaskStatus.NEW, "Купить корм", 3, LocalDateTime.of(2022, 9, 25, 10, 0, 15), 45));
 
-            fileManager.add(new SubTask("Поесть", TaskStatus.NEW, "Важная задача", 7, LocalDateTime.of(2022, 9, 25, 11, 0, 15),  120));
+            fileManager.add(new SubTask("Поесть", TaskStatus.NEW, "Важная задача", 3, LocalDateTime.of(2022, 9, 25, 11, 0, 15),  120));
 
             fileManager.add(new Epic("Купить стриралку", TaskStatus.NEW, "Надо новую"));
 
