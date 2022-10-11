@@ -35,8 +35,8 @@ public class Managers {
 
     public static HTTPTaskManager loadedHTTPTasksManager() {
         HTTPTaskManager httpTaskManager = new HTTPTaskManager("http://localhost:8078");
-        //httpTaskManager.loadFromFile();
-        httpTaskManager.loadedFromFileTasksManager();
+        httpTaskManager.loadFromFile();
+        //httpTaskManager.loadedFromFileTasksManager();
         return httpTaskManager;
     }
 

@@ -30,19 +30,6 @@ import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 
 public class HttpTaskServer {
-
-    //   private final TaskManager taskManager;
-
-//    public HttpTaskServer(TaskManager taskManager) throws IOException {
-//        this.taskManager = taskManager;
-//        HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
-//        server.createContext("/tasks", new TasksHandler());
-//        gson = Managers.getGson();
-//
-//    }
-    //private static final Gson gson = new Gson();
-    //static URI url = URI.create("http://localhost:8080/tasks/task/");
-
     private static final int PORT = 8080;
     private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
     private static Gson gson = new GsonBuilder().
@@ -51,13 +38,7 @@ public class HttpTaskServer {
 
     static HttpServer httpServer;
 
-    public static void main(String[] args) throws IOException {}
-//        HttpServer httpServer = HttpServer.create();
-//        httpServer.bind(new InetSocketAddress(PORT), 0);
-//        httpServer.createContext("/tasks", new TasksHandler());
-      //  httpServer.start();
-        //FileBackedTasksManager fileManager = FileBackedTasksManager.loadedFromFileTasksManager();
-//        System.out.println("HTTP-сервер запущен на " + PORT + " порту!");
+
    public HttpTaskServer() throws IOException {
             this.httpServer = HttpServer.create(new InetSocketAddress("localhost", PORT), 0);
             httpServer.createContext("/tasks", new TasksHandler());
@@ -77,10 +58,9 @@ public class HttpTaskServer {
 
     public static class TasksHandler implements HttpHandler {
 
-
         @Override
         public void handle(HttpExchange exchange) throws IOException {
-            //HTTPTaskManager httpTaskManager = Managers.loadedHTTPTasksManager();
+
             FileBackedTasksManager fileManager = Managers.getDefaultFileManager();
             fileManager.loadFromFile();
 
@@ -229,104 +209,3 @@ public class HttpTaskServer {
         }
     }
 }
-
-//      if (path.contains("/task") && exchange.getRequestURI().getQuery() != null) {
-//              response = gson.toJson(fileManager.getTasks().values());
-//              rCode = 200;
-//              exchange.sendResponseHeaders(rCode, 0);
-//
-//              }
-
-//if (path.contains("/task") && method.equals("GET")) {
-
-
-//            switch (method) {
-//                    case "GET":
-//                    if (path.endsWith("/subtask") && exchange.getRequestURI().getQuery() != null) {
-//                    response = gson.toJson(fileManager.subEpicHash.entrySet());
-//                    rCode = 200;
-//
-//                    }
-//                    break;
-//
-//                    case "POST":
-//                    //todo
-//                    break;
-//                    case "DELETE":
-//                    //todo
-//                    break;
-//                    }
-
-
-
-
-/*
-            Подсказка: как создать задачу
-	String json = gson.toJson(newTask);
-            final HttpRequest.BodyPublisher body = HttpRequest.BodyPublishers.ofString(json);
-            HttpRequest request = HttpRequest.newBuilder().uri(url).POST(body).build();
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-
-GET http://сервер-с-фотографиями/фотографии вернёт все фотографии;
-
-POST http://сервер-с-фотографиями/фотографии сохранит фотографию, переданную в теле запроса;
-
-DELETE http://сервер-с-фотографиями/фотографии удалит все фотографии.
-
-
-
-            if (path.endsWith("/task")) {
-                response = gson.toJson(fileBackedTasksManager.getTasks().values());
-                rCode = 202;
-            } else if (path.endsWith("/epic")) {
-                response = gson.toJson(fileBackedTasksManager.getEpics().values());
-                rCode = 202;
-            } else if (path.endsWith("/subtask")) {
-                response = gson.toJson(fileBackedTasksManager.getSubtasks().values());
-                rCode = 202;
-            }
-            if (path.contains("task") && !exchange.getRequestURI().getQuery().isEmpty()) {
-                String query = exchange.getRequestURI().getQuery();
-                String[] queryArray = query.split("=");
-                int id = Integer.parseInt(queryArray[1]);
-                response = gson.toJson(fileBackedTasksManager.getTaskById(id));
-                rCode = 202;
-            }
-
-     switch (method) {
-                case "GET" :
-break;
-
-                case "POST":
-                    //todo
-                    break;
-                case "DELETE" :
-                    //todo
-                    break;
-
-
-            }
-
-
-
-
-
-                    if (path.endsWith("/task")&& exchange.getRequestURI().getQuery() != null) {
-                        response = gson.toJson(fileBackedTasksManager.getTasks().values());
-                        rCode = 202;
-                    } else if (path.endsWith("/epic")&& exchange.getRequestURI().getQuery() != null) {
-                        response = gson.toJson(fileBackedTasksManager.getEpics().values());
-                        rCode = 202;
-                    } else if (path.endsWith("/subtask")&& exchange.getRequestURI().getQuery() != null) {
-                        response = gson.toJson(fileBackedTasksManager.getSubtasks().values());
-                        rCode = 202;
-                    }
-                    if (path.contains("task") && exchange.getRequestURI().getQuery() != null) {
-                        String query = exchange.getRequestURI().getQuery();
-                        String[] queryArray = query.split("=");
-                        int id = Integer.parseInt(queryArray[1]);
-                        response = gson.toJson(fileBackedTasksManager.getTaskById(id));
-                        rCode = 202;
-                    }
- */

@@ -12,26 +12,18 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class KVTaskClient {
-
-    private static final Gson gson = new GsonBuilder().
-            registerTypeAdapter(LocalDateTime.class, new LocalDateAdapter()).
-            create();
-
-protected URI url;
-
-protected String apiToken;
-
-HttpClient client = HttpClient.newHttpClient();
+    protected URI url;
+    protected String apiToken;
+    HttpClient client = HttpClient.newHttpClient();
 
     public KVTaskClient(String path) {
         this.url = URI.create(path);
-        this.apiToken = register();
     }
 
-    public String register () {
-        URI uri =  URI.create(this.url + "/register");
-        HttpRequest request =  HttpRequest.newBuilder()
-                .uri(uri)
+    public String register() {
+        URI url = URI.create(this.url + "/register");
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(url)
                 .GET()
                 .build();
         try {
@@ -45,6 +37,7 @@ HttpClient client = HttpClient.newHttpClient();
         }
         return "wrong API_TOKEN";
     }
+
 
     public void put(String key, String json)  {
         if (apiToken == null) {

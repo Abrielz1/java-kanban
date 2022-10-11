@@ -2,6 +2,7 @@ package manager.http;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +29,7 @@ public class KVServer {
 
     private void load(HttpExchange h) throws IOException {
         try {
-            System.out.println("\n/save");
+            System.out.println("\n/load");
             if (!hasAuth(h)) {
                 System.out.println("Запрос неавторизован, нужен параметр в query API_TOKEN со значением апи-ключа");
                 h.sendResponseHeaders(403, 0);
@@ -37,28 +38,26 @@ public class KVServer {
             if ("GET".equals(h.getRequestMethod())) {
                 String key = h.getRequestURI().getPath().substring("/load/".length());
                 if (key.isEmpty()) {
-                    System.out.println("Key для сохранения пустой. key указывается в пути: /load/{key}");
+                    System.out.println("Key для загрузки пустой. key указывается в пути: /load/{key}");
                     h.sendResponseHeaders(400, 0);
                     return;
                 }
-                String value = readText(h);
-                if (value.isEmpty()) {
-                    System.out.println("По данному ключу не найдено значений");
-                    h.sendResponseHeaders(404, 0);
+                String response = data.get(key);
+                if (response.isEmpty()) {
+                    System.out.println("Value для отправки пустой.");
+                    h.sendResponseHeaders(400, 0);
                     return;
                 }
-                sendText(h, value);
-                System.out.println("Значение для ключа " + key + " успешно обновлено!");
                 h.sendResponseHeaders(200, 0);
-            } else {
-                System.out.println("/load ждёт POST-запрос, а получил: " + h.getRequestMethod());
-                h.sendResponseHeaders(405, 0);
+
+                try (OutputStream os = h.getResponseBody()) {
+                    os.write(response.getBytes());
+                }
             }
         } finally {
             h.close();
         }
     }
-
 
     private void save(HttpExchange h) throws IOException {
         try {
