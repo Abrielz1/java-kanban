@@ -77,34 +77,23 @@ public class HttpTaskServer {
                         response = gson.toJson(fileManager.getAllTasks().values());
                         rCode = 200;
                     } else if (Pattern.matches("^/tasks/task$", path) && exchange.getRequestURI().getQuery() != null) {
-                        String query = exchange.getRequestURI().getQuery();
-                        String[] queryArray = query.split("=");
-                        int id = Integer.parseInt(queryArray[1]);
+                        int id = parserId(exchange.getRequestURI().getQuery());
                         response = gson.toJson(fileManager.getTaskById(id));
                         rCode = 200;
                     } else if (Pattern.matches("^/tasks/task$", path)) {
                         response = gson.toJson(fileManager.getTasks().values());
                         rCode = 200;
                     } else if (Pattern.matches("^/tasks/subtask/epic$", path) && exchange.getRequestURI().getQuery() != null) {
-                        String query = exchange.getRequestURI().getQuery();
-                        String[] queryArray = query.split("=");
-                        int id = Integer.parseInt(queryArray[1]);
-                        response = gson.toJson(fileManager.getAllSubtasksByEpic(id));
+                        response = response = gson.toJson(fileManager.getAllTasks().values());
                         rCode = 200;
                     } else if (Pattern.matches("^/tasks/epic$", path) && exchange.getRequestURI().getQuery() != null) {
-                        String query = exchange.getRequestURI().getQuery();
-                        String[] queryArray = query.split("=");
-                        int id = Integer.parseInt(queryArray[1]);
-                        response = gson.toJson(fileManager.getEpicById(id));
+                        response = response = gson.toJson(fileManager.getAllTasks().values());
                         rCode = 200;
                     } else if (Pattern.matches("^/tasks/epic$", path)) {
                         response = gson.toJson(fileManager.getEpics().values());
                         rCode = 200;
                     } else if (Pattern.matches("^/tasks/subtask$", path) && exchange.getRequestURI().getQuery() != null) {
-                        String query = exchange.getRequestURI().getQuery();
-                        String[] queryArray = query.split("=");
-                        int id = Integer.parseInt(queryArray[1]);
-                        response = gson.toJson(fileManager.getSubtaskById(id));
+                        response = response = gson.toJson(fileManager.getAllTasks().values());
                         rCode = 200;
                     } else if(Pattern.matches("^/tasks/subtask$", path)) {
                         response = gson.toJson(fileManager.getSubtasks().values());
@@ -120,7 +109,6 @@ public class HttpTaskServer {
                     break;
 
                 case "POST":
-                    //todo
                     if (Pattern.matches("^/tasks/task$", path)) {
                         InputStream inputStream = exchange.getRequestBody();
                         String taskBody = new String(inputStream.readAllBytes(), DEFAULT_CHARSET);
@@ -144,9 +132,7 @@ public class HttpTaskServer {
                 case "DELETE":
 
                     if (Pattern.matches("^/tasks/task$", path) && exchange.getRequestURI().getQuery() != null) {
-                        String query = exchange.getRequestURI().getQuery();
-                        String[] queryArray = query.split("=");
-                        int id = Integer.parseInt(queryArray[1]);
+                        int id = parserId(exchange.getRequestURI().getQuery());;
                         fileManager.removeTaskById(id);
                         response = gson.toJson("Задача c id:" + id + " удалена!");
                         rCode = 200;
@@ -155,9 +141,7 @@ public class HttpTaskServer {
                         response = gson.toJson("Все задачи удалены");
                         rCode = 200;
                     } else if (Pattern.matches("^/tasks/epic$", path) && exchange.getRequestURI().getQuery() != null) {
-                        String query = exchange.getRequestURI().getQuery();
-                        String[] queryArray = query.split("=");
-                        int id = Integer.parseInt(queryArray[1]);
+                        int id = parserId(exchange.getRequestURI().getQuery());
                         fileManager.removeEpicById(id);
                         response = gson.toJson("Комплексная задача c id:" + id + " удалена!");
                         rCode = 200;
@@ -166,9 +150,7 @@ public class HttpTaskServer {
                         response = gson.toJson("Все комплексные задачи и подзадачи удалены");
                         rCode = 200;
                     } else if (Pattern.matches("^/tasks/subtask$", path) && exchange.getRequestURI().getQuery() != null) {
-                        String query = exchange.getRequestURI().getQuery();
-                        String[] queryArray = query.split("=");
-                        int id = Integer.parseInt(queryArray[1]);
+                        int id = parserId(exchange.getRequestURI().getQuery());
                         fileManager.removeSubtaskById(id); //
                         response = gson.toJson("Подзадача c id:" + id + " удалена!");
                         rCode = 200;
@@ -207,5 +189,12 @@ public class HttpTaskServer {
                 os.write(response.getBytes());
             }
         }
+    }
+
+
+    private static int parserId(String query) {
+        String[] queryArray = query.split("=");
+        int id = Integer.parseInt(queryArray[1]);
+        return id;
     }
 }
